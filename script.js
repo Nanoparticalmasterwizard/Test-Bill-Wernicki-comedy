@@ -115,7 +115,8 @@
     list.innerHTML = '<li class="shows__empty">New dates coming soon. Follow on Instagram to hear first, or <a href="#contact">book Bill</a>.</li>';
   } else {
     list.innerHTML = upcoming.map(function (s) {
-      var cta = s.ticketUrl
+      var cta = s.tickets === false ? ""
+        : s.ticketUrl
         ? '<a class="btn btn--primary btn--sm" href="' + esc(s.ticketUrl) + '" target="_blank" rel="noopener">Tickets</a>'
         : '<span class="btn btn--ghost btn--sm" aria-disabled="true">Tickets soon</span>';
       var remind = '<a class="btn btn--ghost btn--sm btn--remind" href="' + esc(calendarHref(s)) + '"' +

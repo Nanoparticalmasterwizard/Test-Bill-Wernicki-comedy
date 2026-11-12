@@ -21,12 +21,13 @@ window.SITE = {
    * "Past shows" automatically the day after it happens.
    * setMinutes is roughly how long Bill's set is; My Stats uses it.
    * Leave ticketUrl empty ("") to show "Tickets soon".
+   * tickets: false hides the Tickets button (open mics, free shows).
    * Optional: time: "20:00" (24-hour, Eastern) makes the "Remind me" calendar
    * event start then; without it the reminder is an all-day event.
    */
   shows: [
-    { date: "2026-11-18", venue: "Toyo Open Mic",                  city: "Colchester, CT", note: "Open mic", ticketUrl: "", setMinutes: 7 },
-    { date: "2026-11-18", venue: "Koncrete Gardens",               city: "Hartford, CT", note: "", ticketUrl: "", setMinutes: 10 },
+    { date: "2026-11-18", venue: "Toyo Open Mic",                  city: "Colchester, CT", note: "Open mic", tickets: false, setMinutes: 7 },
+    { date: "2026-11-18", venue: "Koncrete Gardens",               city: "Hartford, CT", note: "Open mic", tickets: false, setMinutes: 10 },
     { date: "2026-12-03", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "", ticketUrl: "", setMinutes: 10 },
     { date: "2027-01-16", venue: "Madison Square Garden",          city: "New York, NY", note: "Someday", ticketUrl: "", setMinutes: 60 },
 
