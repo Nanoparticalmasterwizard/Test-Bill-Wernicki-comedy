@@ -135,8 +135,8 @@ h1, h2, h3 { margin: 0; }
   margin: 0 0 12px; color: var(--text); text-shadow: 0 1px 12px rgba(0,0,0,.8);
   font: 800 13px/1 var(--body); letter-spacing: .3em; text-transform: uppercase;
 }
-/* Hero lockup: three lines at one size. --lockup is the width of WERNICKI;
-   COMEDY is tracked out to land on exactly the same width (Anton metrics). */
+/* Hero lockup: --lockup is the width of WERNICKI; COMEDY is scaled up
+   (not letter-spaced) to land on exactly the same width (Anton metrics). */
 .hero__title {
   --lockup: min(calc(100vw - 2 * var(--gutter)), 520px);
   width: fit-content; margin: 0;
@@ -145,7 +145,7 @@ h1, h2, h3 { margin: 0; }
   text-shadow: 0 6px 40px rgba(0,0,0,.5);
 }
 .hero__title > span { display: block; }
-.hero__title .hero__comedy { color: var(--accent); letter-spacing: .088em; margin-right: -.088em; padding-top: .04em; }
+.hero__title .hero__comedy { color: var(--accent); font-size: 1.144em; letter-spacing: 0; padding-top: .02em; line-height: .88; }
 @media (min-width: 900px) { .hero__title { --lockup: clamp(400px, 32vw, 560px); } }
 .hero__tag { max-width: 34ch; margin: 20px 0 28px; font-size: clamp(16px, 2vw, 20px); color: #dcd7cd; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -420,9 +420,7 @@ h1, h2, h3 { margin: 0; }
   .contact__row a, .contact__row b { font-size: clamp(18px, 6vw, 26px); }
 }
 
-/* Phones: COMEDY fills the width by size, not letter-spacing, and the hero
-   leaves room for the date banner above Safari's toolbar. */
+/* Phones: leave room for the date banner above Safari's toolbar. */
 @media (max-width: 600px) {
-  .hero__title .hero__comedy { font-size: 1.144em; letter-spacing: 0; margin-right: 0; padding-top: .02em; line-height: .88; }
   .hero { min-height: calc(100vh - 48px); min-height: calc(100svh - 48px); padding-bottom: 32px; }
 }
