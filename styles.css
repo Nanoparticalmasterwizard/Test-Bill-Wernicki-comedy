@@ -207,7 +207,7 @@ h1, h2, h3 { margin: 0; }
   font: 800 10px/1 var(--body); letter-spacing: .15em; text-transform: uppercase;
   border: 1px solid var(--accent); color: var(--accent);
 }
-.show__cta { display: flex; gap: 8px; }
+.show__cta { display: flex; flex-wrap: wrap; gap: 8px; }
 .shows__empty { padding: 32px 0; color: var(--muted); border-bottom: 1px solid var(--line); }
 
 @media (max-width: 640px) {

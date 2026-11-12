@@ -65,6 +65,51 @@
       '<div class="show__meta">' + esc(s.city) + '</div></div>';
   }
 
+  /* ---------- "Remind me": one tap adds the show to the fan's calendar ---------- */
+  // iPhone, iPad and Mac open a calendar file straight into Calendar; everyone else gets Google Calendar.
+  var isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function ymd(d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()); }
+  function eventTimes(s) {
+    var start = new Date(s.d), end;
+    if (s.time) {
+      var t = s.time.split(":");
+      start.setHours(+t[0], +(t[1] || 0), 0, 0);
+      end = new Date(start.getTime() + 2 * 60 * 60 * 1000);   // assume a 2-hour show
+      var stamp = function (d) { return ymd(d) + "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00"; };
+      return { allDay: false, start: stamp(start), end: stamp(end) };
+    }
+    end = new Date(start); end.setDate(end.getDate() + 1);
+    return { allDay: true, start: ymd(start), end: ymd(end) };
+  }
+  function calendarHref(s) {
+    var t = eventTimes(s);
+    var title = "Bill Wernicki Comedy at " + s.venue;
+    var where = s.venue + ", " + s.city;
+    var site = location.href.split("#")[0];
+    var details = (s.ticketUrl ? "Tickets: " + s.ticketUrl + "\n" : "") + "More: " + site;
+    if (!isApple) {
+      return "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+        "&text=" + encodeURIComponent(title) + "&dates=" + t.start + "/" + t.end +
+        "&location=" + encodeURIComponent(where) + "&details=" + encodeURIComponent(details) +
+        (t.allDay ? "" : "&ctz=America/New_York");
+    }
+    var icsEsc = function (v) { return String(v).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n"); };
+    var dt = function (k, v) { return t.allDay ? k + ";VALUE=DATE:" + v : k + ";TZID=America/New_York:" + v; };
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Bill Wernicki Comedy//Shows//EN", "BEGIN:VEVENT",
+      "UID:" + s.date + "-" + s.venue.replace(/\W+/g, "") + "@billwernickicomedy",
+      "DTSTAMP:" + ymd(new Date()) + "T000000Z",
+      dt("DTSTART", t.start), dt("DTEND", t.end),
+      "SUMMARY:" + icsEsc(title), "LOCATION:" + icsEsc(where), "DESCRIPTION:" + icsEsc(details), "URL:" + site,
+      // Nudge the day before (9am for all-day events), and again 3 hours before a timed show.
+      "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + icsEsc(title), "TRIGGER:" + (t.allDay ? "-PT15H" : "-P1D"), "END:VALARM",
+      t.allDay ? "" : "BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:" + icsEsc(title) + "\r\nTRIGGER:-PT3H\r\nEND:VALARM",
+      "END:VEVENT", "END:VCALENDAR"
+    ].filter(Boolean).join("\r\n");
+    return "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+  }
+
   var list = $("#shows-list");
   if (!upcoming.length) {
     list.innerHTML = '<li class="shows__empty">New dates coming soon. Follow on Instagram to hear first, or <a href="#contact">book Bill</a>.</li>';
@@ -73,7 +118,9 @@
       var cta = s.ticketUrl
         ? '<a class="btn btn--primary btn--sm" href="' + esc(s.ticketUrl) + '" target="_blank" rel="noopener">Tickets</a>'
         : '<span class="btn btn--ghost btn--sm" aria-disabled="true">Tickets soon</span>';
-      return '<li class="show reveal">' + dateBlock(s) + info(s) + '<div class="show__cta">' + cta + '</div></li>';
+      var remind = '<a class="btn btn--ghost btn--sm btn--remind" href="' + esc(calendarHref(s)) + '"' +
+        (isApple ? "" : ' target="_blank" rel="noopener"') + ' aria-label="Add ' + esc(s.venue) + ' to your calendar">Remind me</a>';
+      return '<li class="show reveal">' + dateBlock(s) + info(s) + '<div class="show__cta">' + cta + remind + '</div></li>';
     }).join("");
 
     var n = upcoming[0];
