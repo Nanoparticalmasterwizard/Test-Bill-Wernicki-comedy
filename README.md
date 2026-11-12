@@ -40,6 +40,8 @@ Bump the `?v=` number on the CSS/JS links in `index.html` so phones load the new
 ## Join the list
 
 The "Join the list" section is at the bottom of the home page (`#join`), and `join/` is a one-page signup you can link from YouTube or Instagram bios.
-Signups need an email service: paste its form address into `newsletter.action` in `content.js` (Kit, Buttondown and Mailchimp examples are there).
 
-Live at https://nanoparticalmasterwizard.github.io/Test-Bill-Wernicki-comedy/ (signup page: https://nanoparticalmasterwizard.github.io/Test-Bill-Wernicki-comedy/join/)
+Signups go to a Brevo subscription form (free plan) into the BWC list. Visitors stay on the site;
+once double confirmation is on in Brevo (set `confirmEmail: true`), the confirm link should redirect to `https://billwernickicomedy.com/join/?confirmed=1`.
+Paste the form link (contains `sibforms.com/serve/`) into `newsletter.action` in `content.js`.
+To move elsewhere later, export the contact list from Brevo as CSV.
