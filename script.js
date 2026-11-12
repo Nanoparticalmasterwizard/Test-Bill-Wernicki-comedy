@@ -154,7 +154,7 @@
   $("#marquee").innerHTML = group + group;
 
   /* ---------- Clips ---------- */
-  var PH = ["img/billy-stage.jpg", "img/billy-street.jpg", "img/bill-comix.jpg"];
+  var PH = ["img/billy-stage-bar2.jpg", "img/billy-stage-wide.jpg", "img/billy-stage-bar.jpg", "img/billy-stage-smile.jpg"];
   function igId(url) { var m = /instagram\.com\/(?:[^\/]+\/)?(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/.exec(url || ""); return m && m[1]; }
   function clipKey(c) { return c.youtubeId || igId(c.instagramUrl) || ""; }
   var clipsEl = $("#clips");
