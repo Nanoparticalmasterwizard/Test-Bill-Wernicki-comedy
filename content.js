@@ -44,7 +44,7 @@ window.SITE = {
   clips: [
     { title: "Live at Comix Roadhouse", instagramUrl: "https://www.instagram.com/p/DdseBH1THzq/", thumb: "img/bill-comix.jpg", minutes: 1, featured: true },
     { title: "Crowd work",      youtubeId: "", minutes: 2 },
-    { title: "Open mic bit",    youtubeId: "", minutes: 4 },
+    { title: "Open mics",       youtubeId: "", minutes: 4 },
     { title: "Late show",       youtubeId: "", minutes: 3 },
     { title: "Road story",      youtubeId: "", minutes: 2 },
   ],
