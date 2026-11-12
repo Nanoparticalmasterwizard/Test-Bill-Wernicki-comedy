@@ -419,3 +419,10 @@ h1, h2, h3 { margin: 0; }
 @media (max-width: 600px) {
   .contact__row a, .contact__row b { font-size: clamp(18px, 6vw, 26px); }
 }
+
+/* Phones: COMEDY fills the width by size, not letter-spacing, and the hero
+   leaves room for the date banner above Safari's toolbar. */
+@media (max-width: 600px) {
+  .hero__title .hero__comedy { font-size: 1.144em; letter-spacing: 0; margin-right: 0; padding-top: .02em; line-height: .88; }
+  .hero { min-height: calc(100vh - 48px); min-height: calc(100svh - 48px); padding-bottom: 32px; }
+}
