@@ -62,7 +62,12 @@
   function info(s) {
     return '<div><div class="show__venue">' + esc(s.venue) +
       (s.note ? '<span class="show__note">' + esc(s.note) + '</span>' : "") + '</div>' +
-      '<div class="show__meta">' + esc(s.city) + '</div></div>';
+      '<div class="show__meta">' + esc(s.city) + (s.time ? " · " + clock(s.time) : "") + '</div></div>';
+  }
+  // "19:00" -> "7 PM", "19:30" -> "7:30 PM"
+  function clock(t) {
+    var p = t.split(":"), h = +p[0], m = +(p[1] || 0);
+    return ((h % 12) || 12) + (m ? ":" + (m < 10 ? "0" : "") + m : "") + (h < 12 ? " AM" : " PM");
   }
 
   /* ---------- "Remind me": one tap adds the show to the fan's calendar ---------- */
