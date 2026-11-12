@@ -7,7 +7,7 @@ window.SITE = {
   tagline: "Up-and-coming stand-up. Catch him in a small room before the rooms get big.",
 
   bio: "Bill Wernicki is a stand-up comedian out of Connecticut, working everything from open mics in Colchester " +
-       "to the stage at Comix Roadhouse at Mohegan Sun. Catch him now, while the rooms are still small.",
+       "to the stage at Comix Roadhouse at Mohegan Sun. Follow along on Instagram for new dates and clips.",
 
   homeBase: "Connecticut",
   // Leave the emails empty ("") until there's a real inbox: the site then sends
@@ -43,10 +43,7 @@ window.SITE = {
    */
   clips: [
     { title: "Live at Comix Roadhouse", instagramUrl: "https://www.instagram.com/p/DdseBH1THzq/", thumb: "img/bill-comix.jpg", minutes: 1, featured: true },
-    { title: "Crowd work",      youtubeId: "", minutes: 2 },
-    { title: "Open mics",       youtubeId: "", minutes: 4 },
-    { title: "Late show",       youtubeId: "", minutes: 3 },
-    { title: "Road story",      youtubeId: "", minutes: 2 },
+    { title: "More clips on the way", youtubeId: "" },
   ],
 
   // Social links. Delete a line to hide it.
