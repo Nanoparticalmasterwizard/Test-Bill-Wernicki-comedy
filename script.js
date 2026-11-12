@@ -156,7 +156,29 @@
   while (words.length < 10) words = words.concat(words);
   var group = '<div class="marquee__group">' + words.map(function (w) { return "<span>" + esc(w) + "</span>"; }).join("") + "</div>";
   // Two identical groups: the track slides left by exactly one group, then loops.
-  $("#marquee").innerHTML = group + group;
+  var track = $("#marquee");
+  track.innerHTML = group + group;
+  // Moved by script (not CSS animation) so it runs the same on every phone:
+  // measured in pixels, re-measured when fonts load or the screen turns.
+  (function () {
+    var gw = 0, x = 0, last = 0;
+    var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function measure() { gw = track.firstElementChild.getBoundingClientRect().width; }
+    function step(t) {
+      if (last && gw) {
+        var speed = (innerWidth < 600 ? 45 : 60) * (calm ? .5 : 1);  // pixels per second
+        x -= speed * Math.min(t - last, 100) / 1000;
+        if (x <= -gw) x += gw;
+        track.style.transform = "translate3d(" + x.toFixed(2) + "px,0,0)";
+      }
+      last = t;
+      requestAnimationFrame(step);
+    }
+    measure();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    addEventListener("resize", measure);
+    requestAnimationFrame(step);
+  })();
 
   /* ---------- Clips ---------- */
   var PH = ["img/billy-stage-bar2.jpg", "img/billy-stage-wide.jpg", "img/billy-stage-bar.jpg", "img/billy-stage-smile.jpg"];
