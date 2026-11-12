@@ -396,3 +396,8 @@ h1, h2, h3 { margin: 0; }
 .join-page p { margin: 0; color: #d6d1c7; }
 .join-page .signup { width: 100%; text-align: left; }
 .join-page__back { color: var(--muted); font-size: 14px; }
+
+.contact__copy { user-select: all; -webkit-user-select: all; word-break: break-all; }
+.contact__status { min-height: 1.4em; margin: 10px 0 0; font-size: 14px; }
+.contact__status.is-ok { color: var(--text); }
+.contact__status.is-err { color: #fff; font-weight: 600; }
