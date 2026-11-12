@@ -26,7 +26,7 @@ window.SITE = {
    * event start then; without it the reminder is an all-day event.
    */
   shows: [
-    { date: "2026-11-18", venue: "Toyo Open Mic",                  city: "Colchester, CT", note: "Open mic", tickets: false, setMinutes: 7 },
+    { date: "2026-11-18", venue: "Toyo",                           city: "Colchester, CT", note: "Open mic", time: "19:00", tickets: false, setMinutes: 7 },
     { date: "2026-11-18", venue: "Koncrete Gardens",               city: "Hartford, CT", note: "Open mic", tickets: false, setMinutes: 10 },
     { date: "2026-12-03", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "", ticketUrl: "", setMinutes: 10 },
 
