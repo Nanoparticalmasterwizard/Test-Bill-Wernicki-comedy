@@ -12,7 +12,7 @@ window.SITE = {
   homeBase: "Connecticut",
   // Leave the emails empty ("") until there's a real inbox: the site then sends
   // people to Instagram DMs instead of showing an email form.
-  bookingEmail: "",   // e.g. "booking@billwernickicomedy.com"
+  bookingEmail: "booking@billwernickicomedy.com",
   contactEmail: "",
   instagramDm: "https://ig.me/m/billwernickicomedy",
 
