@@ -155,7 +155,27 @@ h1, h2, h3 { margin: 0; }
 .hero__next-body { font: 400 22px/1.15 var(--display); letter-spacing: .02em; text-transform: uppercase; }
 @media (max-width: 960px) { .hero__next { display: none !important; } }
 
+/* ---------- Scrolling dates ---------- */
+.marquee {
+  background: var(--accent-deep); color: var(--accent-ink); overflow: hidden;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; pointer-events: none;
+}
+.marquee__track { display: flex; width: max-content; animation: marquee 40s linear infinite; will-change: transform; }
+.marquee__group { display: flex; flex: none; }
+.marquee__group span {
+  display: flex; align-items: center; padding: 12px 0;
+  font: 400 20px/1 var(--display); letter-spacing: .05em; text-transform: uppercase; white-space: nowrap;
+}
+.marquee__group span::after { content: ""; width: 6px; height: 6px; margin: 0 22px; border-radius: 50%; background: currentColor; opacity: .6; }
+@keyframes marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+@media (max-width: 600px) {
+  .marquee__group span { font-size: 15px; padding: 10px 0; }
+  .marquee__group span::after { margin: 0 14px; width: 5px; height: 5px; }
+  .marquee__track { animation-duration: 32s; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
   .hero__media img { animation: none; }
   html { scroll-behavior: auto; }
 }

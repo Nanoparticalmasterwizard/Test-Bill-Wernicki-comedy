@@ -106,6 +106,16 @@
     });
   }
 
+  /* ---------- Scrolling dates ---------- */
+  var words = upcoming.slice(0, 6).map(function (s) { return MON[s.d.getMonth()] + " " + s.d.getDate() + " · " + s.venue; });
+  if (!words.length) words = ["New dates soon", "Book Bill"];
+  words.push("Bill Wernicki Comedy");
+  // Each group must be wider than the screen so the loop never shows a gap.
+  while (words.length < 10) words = words.concat(words);
+  var group = '<div class="marquee__group">' + words.map(function (w) { return "<span>" + esc(w) + "</span>"; }).join("") + "</div>";
+  // Two identical groups: the track slides left by exactly one group, then loops.
+  $("#marquee").innerHTML = group + group;
+
   /* ---------- Clips ---------- */
   var PH = ["img/billy-stage.jpg", "img/billy-street.jpg", "img/bill-comix.jpg"];
   function igId(url) { var m = /instagram\.com\/(?:[^\/]+\/)?(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/.exec(url || ""); return m && m[1]; }
