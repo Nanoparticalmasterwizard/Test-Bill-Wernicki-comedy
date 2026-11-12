@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bill Wernicki Comedy//Shows//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:2026-09-24-comix-roadhouse@billwernickicomedy.com
+DTSTAMP:20260924T000000Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20260925
+SUMMARY:Bill Wernicki Comedy at Comix Roadhouse
+LOCATION:Comix Roadhouse\, Uncasville\, CT
+DESCRIPTION:More: https://billwernickicomedy.com/
+URL:https://billwernickicomedy.com/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Comix Roadhouse
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

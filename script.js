@@ -66,7 +66,7 @@
   }
 
   /* ---------- "Remind me": one tap adds the show to the fan's calendar ---------- */
-  // iPhone, iPad and Mac open a calendar file straight into Calendar; everyone else gets Google Calendar.
+  // iPhone, iPad and Mac open a calendar file (from cal/) straight into Calendar; everyone else gets Google Calendar.
   var isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function ymd(d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()); }
@@ -94,20 +94,9 @@
         "&location=" + encodeURIComponent(where) + "&details=" + encodeURIComponent(details) +
         (t.allDay ? "" : "&ctz=America/New_York");
     }
-    var icsEsc = function (v) { return String(v).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n"); };
-    var dt = function (k, v) { return t.allDay ? k + ";VALUE=DATE:" + v : k + ";TZID=America/New_York:" + v; };
-    var ics = [
-      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Bill Wernicki Comedy//Shows//EN", "BEGIN:VEVENT",
-      "UID:" + s.date + "-" + s.venue.replace(/\W+/g, "") + "@billwernickicomedy",
-      "DTSTAMP:" + ymd(new Date()) + "T000000Z",
-      dt("DTSTART", t.start), dt("DTEND", t.end),
-      "SUMMARY:" + icsEsc(title), "LOCATION:" + icsEsc(where), "DESCRIPTION:" + icsEsc(details), "URL:" + site,
-      // Nudge the day before (9am for all-day events), and again 3 hours before a timed show.
-      "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + icsEsc(title), "TRIGGER:" + (t.allDay ? "-PT15H" : "-P1D"), "END:VALARM",
-      t.allDay ? "" : "BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:" + icsEsc(title) + "\r\nTRIGGER:-PT3H\r\nEND:VALARM",
-      "END:VEVENT", "END:VCALENDAR"
-    ].filter(Boolean).join("\r\n");
-    return "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+    // iPhones won't open a calendar built inside the page, so link to a real file.
+    // tools/build-calendar.js writes these files into cal/ from content.js.
+    return "cal/" + s.date + "-" + s.venue.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + ".ics";
   }
 
   var list = $("#shows-list");

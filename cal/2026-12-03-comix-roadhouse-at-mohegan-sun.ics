@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bill Wernicki Comedy//Shows//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:2026-12-03-comix-roadhouse-at-mohegan-sun@billwernickicomedy.com
+DTSTAMP:20261203T000000Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261204
+SUMMARY:Bill Wernicki Comedy at Comix Roadhouse at Mohegan Sun
+LOCATION:Comix Roadhouse at Mohegan Sun\, Uncasville\, CT
+DESCRIPTION:More: https://billwernickicomedy.com/
+URL:https://billwernickicomedy.com/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Comix Roadhouse at Mohegan Sun
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
