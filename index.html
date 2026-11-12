@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bill Wernicki Comedy</title>
+  <meta name="description" content="Bill Wernicki Comedy: Connecticut stand-up. Show dates, clips, merch and booking.">
+  <meta property="og:title" content="Bill Wernicki Comedy">
+  <meta property="og:description" content="Tour dates, clips, merch and booking.">
+  <meta property="og:image" content="https://nanoparticalmasterwizard.github.io/Test-Bill-Wernicki-comedy/img/bill-comix.jpg">
+  <meta property="og:url" content="https://nanoparticalmasterwizard.github.io/Test-Bill-Wernicki-comedy/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0b0b0c">
+  <link rel="icon" type="image/png" href="img/bill-wernicki-logo.png">
+  <link rel="apple-touch-icon" href="img/bill-wernicki-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#shows">Skip to shows</a>
+
+  <header class="nav" id="top">
+    <a class="nav__logo" href="#top" aria-label="Bill Wernicki home"><img src="img/bill-wernicki-logo.png" alt="" width="36" height="36">BILL&nbsp;WERNICKI&nbsp;COMEDY</a>
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+    <nav class="nav__links" id="nav-links">
+      <a href="#shows">Shows</a>
+      <a href="#watch">Watch</a>
+      <a href="#more">More</a>
+      <a href="#merch">Merch</a>
+      <a href="#my-stats">My Stats</a>
+      <a href="#contact" class="nav__cta">Booking</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__media">
+        <img src="img/bill-comix.jpg" alt="Bill Wernicki on stage at Comix Roadhouse in front of a brick wall" fetchpriority="high">
+      </div>
+      <div class="hero__content">
+        <p class="eyebrow">Stand-up comedian</p>
+        <h1 class="hero__title">Bill<br>Wernicki<span class="hero__comedy">Comedy</span></h1>
+        <p class="hero__tag" data-bind="tagline"></p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#shows">See him live</a>
+          <a class="btn btn--ghost" href="#watch">Watch clips</a>
+        </div>
+      </div>
+      <a class="hero__next" id="hero-next" href="#shows" hidden>
+        <span class="hero__next-label">Next show</span>
+        <span class="hero__next-body"></span>
+      </a>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marquee"></div>
+    </div>
+
+    <!-- SHOWS -->
+    <section class="section" id="shows">
+      <div class="section__head">
+        <h2 class="section__title">Shows</h2>
+        <p class="section__sub">Come out. Sit up front. Bring the friend who laughs loud.</p>
+      </div>
+      <ol class="shows" id="shows-list"></ol>
+      <details class="past" id="past-wrap">
+        <summary>Past shows <span class="past__hint">· tap “I was there” to add them to your stats</span></summary>
+        <ol class="shows shows--past" id="past-list"></ol>
+      </details>
+    </section>
+
+    <!-- WATCH -->
+    <section class="section section--alt" id="watch">
+      <div class="section__head">
+        <h2 class="section__title">Watch</h2>
+        <p class="section__sub">The best bits from the road.</p>
+      </div>
+      <div class="clips" id="clips"></div>
+    </section>
+
+    <!-- MORE -->
+    <section class="section" id="more">
+      <div class="section__head">
+        <h2 class="section__title">More</h2>
+        <p class="section__sub">Follow along between shows.</p>
+      </div>
+      <div class="more">
+        <div class="more__about">
+          <img src="img/billy-street.jpg" alt="Bill Wernicki reading a newspaper outside a neon-lit restaurant at night" loading="lazy">
+          <div>
+            <h3>About Bill</h3>
+            <p data-bind="bio"></p>
+          </div>
+        </div>
+        <ul class="socials" id="socials"></ul>
+      </div>
+    </section>
+
+    <!-- MERCH -->
+    <section class="section section--alt" id="merch">
+      <div class="section__head">
+        <h2 class="section__title">Merch</h2>
+        <p class="section__sub">Small batch. Wear it to a show.</p>
+      </div>
+      <div class="merch" id="merch-list"></div>
+    </section>
+
+    <!-- FAN CARD -->
+    <section class="section" id="my-stats">
+      <div class="section__head">
+        <h2 class="section__title">My Stats</h2>
+        <p class="section__sub">Your Bill Wernicki stats. Mark the shows you caught and every clip you watch here counts toward your time.</p>
+      </div>
+      <div class="fancard">
+        <div class="fancard__card">
+          <div class="fancard__top">
+            <span class="fancard__brand"><img src="img/bill-wernicki-logo.png" alt="" width="44" height="44">BILL WERNICKI COMEDY</span>
+          </div>
+          <div class="fancard__stats">
+            <div><b id="fc-shows">0</b><span>shows attended</span></div>
+            <div><b id="fc-live">0</b><span>minutes live</span></div>
+            <div><b id="fc-watched">0</b><span>minutes watched</span></div>
+            <div><b id="fc-cities">0</b><span>cities</span></div>
+          </div>
+          <p class="fancard__first" id="fc-first">No shows logged yet. Find one you went to under Past shows.</p>
+        </div>
+        <div class="fancard__side">
+          <h3>How it works</h3>
+          <ul>
+            <li>Hit <b>I was there</b> on any past show.</li>
+            <li>Watch clips on this page and your watch time adds up.</li>
+            <li>Your card lives in this browser. No account needed.</li>
+          </ul>
+          <div class="fancard__actions">
+            <button class="btn btn--primary" id="fc-share">Share my stats</button>
+            <button class="btn btn--ghost" id="fc-reset">Reset</button>
+          </div>
+          <p class="fancard__msg" id="fc-msg" role="status"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section--contact" id="contact">
+      <div class="section__head">
+        <h2 class="section__title">Booking &amp; Contact</h2>
+        <p class="section__sub">Clubs, colleges, private events, podcasts and press.</p>
+      </div>
+      <div class="contact">
+        <div class="contact__info">
+          <div class="contact__row"><span>Booking</span><a data-bind-href="mailto:bookingEmail" data-bind="bookingEmail"></a></div>
+          <div class="contact__row"><span>Press &amp; general</span><a data-bind-href="mailto:contactEmail" data-bind="contactEmail"></a></div>
+          <div class="contact__row"><span>Based in</span><b data-bind="homeBase"></b></div>
+        </div>
+        <form class="contact__form" id="contact-form">
+          <label>Name<input name="name" required autocomplete="name"></label>
+          <label>Email<input name="email" type="email" required autocomplete="email"></label>
+          <label>What’s it for?
+            <select name="type">
+              <option>Booking a show</option>
+              <option>Private event</option>
+              <option>Podcast / press</option>
+              <option>Just saying hi</option>
+            </select>
+          </label>
+          <label>Details<textarea name="message" rows="4" placeholder="Date, venue, city, budget, whatever helps"></textarea></label>
+          <button class="btn btn--primary" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="footer__name"><img src="img/bill-wernicki-logo.png" alt="" width="40" height="40">BILL WERNICKI COMEDY</span>
+    <span>© <span id="year"></span> Bill Wernicki. All rights reserved.</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
