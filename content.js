@@ -21,6 +21,8 @@ window.SITE = {
    * "Past shows" automatically the day after it happens.
    * setMinutes is roughly how long Bill's set is; My Stats uses it.
    * Leave ticketUrl empty ("") to show "Tickets soon".
+   * Optional: time: "20:00" (24-hour, Eastern) makes the "Remind me" calendar
+   * event start then; without it the reminder is an all-day event.
    */
   shows: [
     { date: "2026-11-21", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "", ticketUrl: "", setMinutes: 10 },  // date PLACEHOLDER
