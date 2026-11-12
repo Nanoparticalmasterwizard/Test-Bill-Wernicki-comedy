@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <a class="skip" href="#shows">Skip to shows</a>
@@ -154,9 +154,14 @@
       </div>
       <div class="contact">
         <div class="contact__info">
-          <div class="contact__row"><span>Booking</span><a data-bind-href="mailto:bookingEmail" data-bind="bookingEmail"></a></div>
-          <div class="contact__row"><span>Press &amp; general</span><a data-bind-href="mailto:contactEmail" data-bind="contactEmail"></a></div>
+          <div class="contact__row" id="row-booking"><span>Booking</span><a data-bind-href="mailto:bookingEmail" data-bind="bookingEmail"></a></div>
+          <div class="contact__row" id="row-contact"><span>Press &amp; general</span><a data-bind-href="mailto:contactEmail" data-bind="contactEmail"></a></div>
+          <div class="contact__row" id="row-dm" hidden><span>Fastest way to reach Bill</span><a data-bind-href="instagramDm" target="_blank" rel="noopener">DM @billwernickicomedy</a></div>
           <div class="contact__row"><span>Based in</span><b data-bind="homeBase"></b></div>
+        </div>
+        <div class="contact__dm" id="contact-dm" hidden>
+          <p>Booking a show, a private event or a podcast? Send Bill a message on Instagram with the date, place and what you have in mind.</p>
+          <a class="btn btn--primary" data-bind-href="instagramDm" target="_blank" rel="noopener">Message on Instagram</a>
         </div>
         <form class="contact__form" id="contact-form">
           <label>Name<input name="name" required autocomplete="name"></label>
@@ -182,7 +187,7 @@
     <a href="#top">Back to top ↑</a>
   </footer>
 
-  <script src="content.js?v=3"></script>
-  <script src="script.js?v=3"></script>
+  <script src="content.js?v=4"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

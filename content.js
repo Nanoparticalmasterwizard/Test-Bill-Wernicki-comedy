@@ -6,17 +6,20 @@
 window.SITE = {
   tagline: "Up-and-coming stand-up. Catch him in a small room before the rooms get big.",
 
-  bio: "PLACEHOLDER: Bill Wernicki is a Connecticut stand-up comedian working clubs, bars and open mics around New England. " +
-       "Write two or three sentences here: where he's from, what his comedy is about, and anything he's done that people should know.",
+  bio: "Bill Wernicki is a stand-up comedian out of Connecticut, working everything from open mics in Colchester " +
+       "to the stage at Comix Roadhouse at Mohegan Sun. Catch him now, while the rooms are still small.",
 
   homeBase: "Connecticut",
-  bookingEmail: "booking@billwernickicomedy.com",   // PLACEHOLDER
-  contactEmail: "hello@billwernickicomedy.com",     // PLACEHOLDER
+  // Leave the emails empty ("") until there's a real inbox: the site then sends
+  // people to Instagram DMs instead of showing an email form.
+  bookingEmail: "",   // e.g. "booking@billwernickicomedy.com"
+  contactEmail: "",
+  instagramDm: "https://ig.me/m/billwernickicomedy",
 
   /*
    * Shows. Dates are YYYY-MM-DD. The site sorts them and moves a show to
    * "Past shows" automatically the day after it happens.
-   * setMinutes is roughly how long Bill's set is; the Fan Card uses it.
+   * setMinutes is roughly how long Bill's set is; My Stats uses it.
    * Leave ticketUrl empty ("") to show "Tickets soon".
    */
   shows: [
@@ -34,22 +37,22 @@ window.SITE = {
    * youtube.com/watch?v=XXXXXXXXXXX (or after youtu.be/ or /shorts/).
    * For an Instagram post or reel, paste its link as instagramUrl instead.
    * Leave both empty to show a "coming soon" tile.
-   * minutes is the clip length; the Fan Card counts it when someone plays it.
+   * minutes is the clip length; My Stats counts it when someone plays it.
    */
   clips: [
     { title: "Live at Comix Roadhouse", instagramUrl: "https://www.instagram.com/p/DdseBH1THzq/", thumb: "img/bill-comix.jpg", minutes: 1, featured: true },
-    { title: "PLACEHOLDER: Crowd work",      youtubeId: "", minutes: 2 },
-    { title: "PLACEHOLDER: Open mic bit",    youtubeId: "", minutes: 4 },
-    { title: "PLACEHOLDER: Late show",       youtubeId: "", minutes: 3 },
-    { title: "PLACEHOLDER: Road story",      youtubeId: "", minutes: 2 },
+    { title: "Crowd work",      youtubeId: "", minutes: 2 },
+    { title: "Open mic bit",    youtubeId: "", minutes: 4 },
+    { title: "Late show",       youtubeId: "", minutes: 3 },
+    { title: "Road story",      youtubeId: "", minutes: 2 },
   ],
 
   // Social links. Delete a line to hide it.
   socials: [
     { name: "Instagram", handle: "@billwernickicomedy", url: "https://www.instagram.com/billwernickicomedy/" },
-    { name: "TikTok",    handle: "@billwernickicomedy", url: "https://tiktok.com/" },     // PLACEHOLDER
-    { name: "YouTube",   handle: "Bill Wernicki", url: "https://youtube.com/" },    // PLACEHOLDER
-    { name: "X",         handle: "@billwernickicomedy", url: "https://x.com/" },          // PLACEHOLDER
+    // Add more when they exist, e.g.:
+    // { name: "TikTok",  handle: "@billwernickicomedy", url: "https://www.tiktok.com/@billwernickicomedy" },
+    // { name: "YouTube", handle: "Bill Wernicki",       url: "https://www.youtube.com/@..." },
   ],
 
   /*

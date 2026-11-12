@@ -33,4 +33,8 @@ so they don't follow someone to another device.
 There's no backend: "Send" opens the visitor's email app addressed to `bookingEmail`.
 To receive messages without that step, plug in a form service such as Formspree.
 
+## After editing
+
+Bump the `?v=` number on the CSS/JS links in `index.html` so phones load the new files instead of a cached copy.
+
 Live at https://nanoparticalmasterwizard.github.io/Test-Bill-Wernicki-comedy/

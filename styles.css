@@ -317,6 +317,11 @@ h1, h2, h3 { margin: 0; }
 .contact__row a, .contact__row b { font: 400 clamp(22px, 3vw, 30px)/1.1 var(--display); letter-spacing: .02em; text-decoration: none; word-break: break-word; font-weight: 400; }
 .contact__row a:hover { text-decoration: underline; }
 .contact__form { display: grid; gap: 16px; }
+.contact__form[hidden], .contact__row[hidden], .contact__dm[hidden] { display: none; }
+.contact__dm { align-self: start; padding: 28px; background: rgba(0,0,0,.18); }
+.contact__dm p { margin: 0 0 20px; font-size: 18px; max-width: 40ch; }
+.contact__dm .btn--primary { background: var(--bg); color: var(--text); }
+.contact__dm .btn--primary:hover { background: #000; }
 .contact__form label { display: grid; gap: 6px; font: 800 12px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; }
 .contact__form input, .contact__form select, .contact__form textarea {
   width: 100%; padding: 14px; font: 400 16px/1.4 var(--body); color: var(--text);

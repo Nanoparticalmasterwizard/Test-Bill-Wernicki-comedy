@@ -14,10 +14,20 @@
     if (v != null) el.textContent = v;
   });
   document.querySelectorAll("[data-bind-href]").forEach(function (el) {
+    // "mailto:key" builds a mailto link; a bare "key" uses the value as the URL.
     var spec = el.getAttribute("data-bind-href").split(":");
-    var v = S[spec[1]];
-    if (v) el.setAttribute("href", spec[0] + ":" + v);
+    var key = spec.length > 1 ? spec[1] : spec[0];
+    var v = S[key];
+    if (v) el.setAttribute("href", spec.length > 1 ? spec[0] + ":" + v : v);
   });
+
+  /* ---------- Contact: no real inbox yet means Instagram DMs ---------- */
+  if (!S.bookingEmail) {
+    $("#row-booking").hidden = true;
+    $("#contact-form").hidden = true;
+    if (S.instagramDm) { $("#row-dm").hidden = false; $("#contact-dm").hidden = false; }
+  }
+  if (!S.contactEmail) $("#row-contact").hidden = true;
   $("#year").textContent = new Date().getFullYear();
 
   /* ---------- My Stats storage (this browser only) ---------- */
@@ -114,7 +124,7 @@
     var ig = igId(c.instagramUrl);
     var playable = !!(c.youtubeId || ig);
     var thumb = c.thumb ? c.thumb : c.youtubeId ? "https://i.ytimg.com/vi/" + encodeURIComponent(c.youtubeId) + "/hqdefault.jpg" : PH[i % PH.length];
-    var len = c.minutes ? c.minutes + " min" : "";
+    var len = playable && c.minutes ? c.minutes + " min" : "";
     var badge = playable ? '<span class="clip__play"></span>' + (ig ? '<span class="clip__soon">Instagram</span>' : "") : '<span class="clip__soon">Coming soon</span>';
     return '<figure class="clip reveal' + (c.featured ? " clip--featured" : "") + (ig ? " clip--ig" : "") + '">' +
       '<button class="clip__frame" type="button" data-i="' + i + '" aria-label="Play ' + esc(c.title) + '"' + (playable ? "" : " disabled") + '>' +
