@@ -6,8 +6,8 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:2026-11-18-koncrete-gardens@billwernickicomedy.com
 DTSTAMP:20261118T000000Z
-DTSTART;VALUE=DATE:20261118
-DTEND;VALUE=DATE:20261119
+DTSTART;TZID=America/New_York:20261118T200000
+DTEND;TZID=America/New_York:20261118T220000
 SUMMARY:Bill Wernicki Comedy at Koncrete Gardens
 LOCATION:Koncrete Gardens\, Hartford\, CT
 DESCRIPTION:More: https://billwernickicomedy.com/
@@ -15,7 +15,12 @@ URL:https://billwernickicomedy.com/
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Bill Wernicki Comedy at Koncrete Gardens
-TRIGGER:-PT15H
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Koncrete Gardens
+TRIGGER:-PT3H
 END:VALARM
 END:VEVENT
 END:VCALENDAR
