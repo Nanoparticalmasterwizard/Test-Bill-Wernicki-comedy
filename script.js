@@ -257,12 +257,39 @@
   });
 
   /* ---------- Contact form (opens the visitor's email app) ---------- */
+  // Booking form: sent from the page (FormSubmit relays it to bookingEmail),
+  // so visitors never get bounced into their email app.
   $("#contact-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    var f = e.target.elements;
-    var subject = f.type.value + " - from " + f.name.value;
-    var body = f.message.value + "\n\n" + f.name.value + "\n" + f.email.value;
-    location.href = "mailto:" + (S.bookingEmail || "") + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    var form = e.target, f = form.elements, btn = form.querySelector("button[type=submit]");
+    var status = form.querySelector(".contact__status");
+    function say(t, kind) { status.textContent = t; status.className = "contact__status" + (kind ? " is-" + kind : ""); }
+    if (!f.name.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) {
+      return say("Add your name and a valid email so Bill can write back.", "err");
+    }
+    btn.disabled = true; say("Sending...", "");
+    fetch("https://formsubmit.co/ajax/" + S.bookingEmail, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: f.type.value + " - from " + f.name.value.trim(),
+        _replyto: f.email.value.trim(),
+        _template: "table",
+        _captcha: "false",
+        name: f.name.value.trim(),
+        email: f.email.value.trim(),
+        "What it's for": f.type.value,
+        message: f.message.value,
+      }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (String(j.success) !== "true") throw new Error(j.message || "not sent");
+        form.reset();
+        say("Sent. Bill will get back to you soon.", "ok");
+      })
+      .catch(function () { say("That didn't send. Email " + S.bookingEmail + " directly instead.", "err"); })
+      .then(function () { btn.disabled = false; });
   });
 
   /* ---------- Nav ---------- */
