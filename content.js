@@ -4,7 +4,7 @@
  * Anything marked PLACEHOLDER still needs a real value.
  */
 window.SITE = {
-  tagline: "Up-and-coming stand-up. Catch him in a small room before the rooms get big.",
+  tagline: "Up-and-coming stand-up out of Connecticut.",
 
   bio: "Bill Wernicki is a stand-up comedian out of Connecticut, working everything from open mics in Colchester " +
        "to the stage at Comix Roadhouse at Mohegan Sun. Follow along on Instagram for new dates and clips.",

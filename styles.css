@@ -290,7 +290,17 @@ h1, h2, h3 { margin: 0; }
 .socials a:hover::after { transform: translate(3px,-3px); color: var(--accent); }
 .socials__label { margin-left: auto; }
 @media (max-width: 860px) { .more { grid-template-columns: 1fr; } }
-@media (max-width: 520px) { .more__about { grid-template-columns: 1fr; } .more__about img { max-width: 220px; } }
+@media (max-width: 520px) { .more__about { grid-template-columns: 1fr; } .more__about img { width: 100%; aspect-ratio: 4 / 3; object-position: 50% 40%; } }
+
+/* Phone pass: consistent section heads, full-width buttons, tidier stats labels */
+@media (max-width: 600px) {
+  .section__head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 32px; }
+  .contact__form .btn--primary { justify-self: stretch; }
+  .fancard__stats span { font-size: 12px; letter-spacing: .06em; }
+  .hero__tag { margin: 16px 0 24px; }
+  .socials span { white-space: nowrap; font-size: 13px; }
+  .socials b { font-size: 24px; }
+}
 
 /* ---------- Merch ---------- */
 .merch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -386,8 +396,8 @@ h1, h2, h3 { margin: 0; }
 .signup__msg { min-height: 1.4em; margin: 0; font-size: 14px; color: var(--muted); }
 .signup__msg.is-ok { color: var(--text); }
 .signup__msg.is-err { color: var(--accent-hover); }
-@media (max-width: 860px) { .join__inner { grid-template-columns: 1fr; } }
-@media (max-width: 420px) {
+@media (max-width: 860px) { .join__inner { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) {
   .signup__row { flex-direction: column; gap: 10px; }
   .signup__row input { border-right: 2px solid var(--line); }
 }
@@ -407,3 +417,7 @@ h1, h2, h3 { margin: 0; }
 .contact__status { min-height: 1.4em; margin: 10px 0 0; font-size: 14px; }
 .contact__status.is-ok { color: var(--text); }
 .contact__status.is-err { color: #fff; font-weight: 600; }
+
+@media (max-width: 600px) {
+  .contact__row a, .contact__row b { font-size: clamp(18px, 6vw, 26px); }
+}
