@@ -20,15 +20,13 @@ window.SITE = {
    * Leave ticketUrl empty ("") to show "Tickets soon".
    */
   shows: [
-    { date: "2026-11-21", venue: "PLACEHOLDER Comedy Club", city: "City, ST", note: "Showcase", ticketUrl: "", setMinutes: 10 },
-    { date: "2026-12-05", venue: "PLACEHOLDER Brewery",     city: "City, ST", note: "Headlining", ticketUrl: "", setMinutes: 30 },
-    { date: "2026-12-19", venue: "PLACEHOLDER Theater",     city: "City, ST", note: "Holiday show", ticketUrl: "", setMinutes: 15 },
-    { date: "2027-01-16", venue: "PLACEHOLDER Comedy Bar",  city: "City, ST", note: "", ticketUrl: "", setMinutes: 15 },
+    { date: "2026-11-21", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "", ticketUrl: "", setMinutes: 10 },  // date PLACEHOLDER
+    { date: "2026-12-05", venue: "Toyo Open Mic",                  city: "Colchester, CT", note: "Open mic", ticketUrl: "", setMinutes: 7 },  // date PLACEHOLDER
+    { date: "2026-12-19", venue: "Concrete Gardens",               city: "Hartford, CT", note: "", ticketUrl: "", setMinutes: 10 },  // date PLACEHOLDER
+    { date: "2027-01-16", venue: "Madison Square Garden",          city: "New York, NY", note: "Someday", ticketUrl: "", setMinutes: 60 },
 
     // Past shows (fans can mark these "I was there")
-    { date: "2026-10-24", venue: "PLACEHOLDER Venue",       city: "City, ST", note: "", setMinutes: 10 },
-    { date: "2026-09-24", venue: "Comix Roadhouse",         city: "Uncasville, CT", note: "", setMinutes: 5 },  // from Instagram; set length is a guess
-    { date: "2026-09-27", venue: "PLACEHOLDER Open Mic",    city: "City, ST", note: "", setMinutes: 7 },
+    { date: "2026-09-24", venue: "Comix Roadhouse",                city: "Uncasville, CT", note: "", setMinutes: 5 },  // from Instagram; set length is a guess
   ],
 
   /*
