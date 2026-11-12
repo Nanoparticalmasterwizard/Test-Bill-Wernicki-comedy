@@ -106,15 +106,6 @@
     });
   }
 
-  /* ---------- Marquee ---------- */
-  var words = upcoming.length
-    ? upcoming.slice(0, 6).map(function (s) { return MON[s.d.getMonth()] + " " + s.d.getDate() + " " + s.city; })
-    : ["New dates soon", "Book Bill", "Stand-up comedy"];
-  words = words.concat(["Bill Wernicki Comedy"]);
-  var chunk = words.map(function (w) { return "<span>" + esc(w) + "</span>"; }).join("");
-  // Two copies so the loop is seamless; repeat until wide enough.
-  $("#marquee").innerHTML = new Array(4).fill(chunk).join("");
-
   /* ---------- Clips ---------- */
   var PH = ["img/billy-stage.jpg", "img/billy-street.jpg", "img/bill-comix.jpg"];
   function igId(url) { var m = /instagram\.com\/(?:[^\/]+\/)?(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/.exec(url || ""); return m && m[1]; }

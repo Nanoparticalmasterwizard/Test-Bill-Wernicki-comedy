@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
   <a class="skip" href="#shows">Skip to shows</a>
@@ -32,6 +32,7 @@
       <a href="#more">More</a>
       <a href="#merch">Merch</a>
       <a href="#my-stats">My Stats</a>
+      <a href="#join">Join</a>
       <a href="#contact" class="nav__cta">Booking</a>
     </nav>
   </header>
@@ -57,10 +58,6 @@
       </a>
     </section>
 
-    <!-- MARQUEE -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track" id="marquee"></div>
-    </div>
 
     <!-- SHOWS -->
     <section class="section" id="shows">
@@ -179,6 +176,23 @@
         </form>
       </div>
     </section>
+    <!-- JOIN THE LIST -->
+    <section class="section join" id="join">
+      <div class="join__inner">
+        <div>
+          <h2 class="section__title">Join the list</h2>
+          <p class="section__sub">New shows go here first. One email when Bill books a date, nothing else.</p>
+        </div>
+        <form class="signup" data-signup novalidate>
+          <label class="signup__label" for="signup-email">Email address</label>
+          <div class="signup__row">
+            <input id="signup-email" type="email" required autocomplete="email" placeholder="you@email.com">
+            <button class="btn btn--primary" type="submit">Get show alerts</button>
+          </div>
+          <p class="signup__msg" role="status"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -187,7 +201,8 @@
     <a href="#top">Back to top ↑</a>
   </footer>
 
-  <script src="content.js?v=4"></script>
-  <script src="script.js?v=4"></script>
+  <script src="content.js?v=5"></script>
+  <script src="script.js?v=5"></script>
+  <script src="signup.js?v=5"></script>
 </body>
 </html>

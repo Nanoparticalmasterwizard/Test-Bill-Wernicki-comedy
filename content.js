@@ -56,6 +56,16 @@ window.SITE = {
   ],
 
   /*
+   * Newsletter ("Join the list"). Paste the form address from your email
+   * service here and signups start working on the page and on /join.
+   *   Kit (ConvertKit): action "https://app.kit.com/forms/FORM_ID/subscriptions", emailField "email_address"
+   *   Buttondown:       action "https://buttondown.com/api/emails/embed-subscribe/USERNAME", emailField "email"
+   *   Mailchimp:        action from the embedded-form code (ends in /subscribe/post?...), emailField "EMAIL"
+   * While action is empty, the form tells people the list opens soon.
+   */
+  newsletter: { action: "", emailField: "email" },
+
+  /*
    * Merch. url can point at any store (Shopify, Big Cartel, Fourthwall, etc).
    * Leave url empty to show "Coming soon".
    */

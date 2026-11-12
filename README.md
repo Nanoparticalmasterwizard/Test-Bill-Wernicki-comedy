@@ -37,4 +37,9 @@ To receive messages without that step, plug in a form service such as Formspree.
 
 Bump the `?v=` number on the CSS/JS links in `index.html` so phones load the new files instead of a cached copy.
 
-Live at https://nanoparticalmasterwizard.github.io/Test-Bill-Wernicki-comedy/
+## Join the list
+
+The "Join the list" section is at the bottom of the home page (`#join`), and `join/` is a one-page signup you can link from YouTube or Instagram bios.
+Signups need an email service: paste its form address into `newsletter.action` in `content.js` (Kit, Buttondown and Mailchimp examples are there).
+
+Live at https://nanoparticalmasterwizard.github.io/Test-Bill-Wernicki-comedy/ (signup page: https://nanoparticalmasterwizard.github.io/Test-Bill-Wernicki-comedy/join/)
