@@ -67,7 +67,7 @@ window.SITE = {
    */
   newsletter: {
     action: "https://054c5ddd.sibforms.com/serve/MUIFAL5KFD-54bGL-do0PnQ6CANsqKtTme4G2NuQdwYq8Od3LqMV6TnS8rCipIS4C5jemAIR1tdMUEaI3JD3YARdYDhBAA3pNikT-1cJdJQpHybH95sSnN7_7z1wzzglIIbXKOw5jl7H2TvU73bnJOpWysYVpGky1GEgsbuE_5V4hwwyAy5Em4U3Ucai_RKEdZBh_W33kIEt4vXGCg==",
-    confirmEmail: false,
+    confirmEmail: true,
   },
 
   /*
