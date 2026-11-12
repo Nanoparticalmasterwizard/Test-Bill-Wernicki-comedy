@@ -25,9 +25,9 @@ window.SITE = {
    * event start then; without it the reminder is an all-day event.
    */
   shows: [
-    { date: "2026-11-21", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "", ticketUrl: "", setMinutes: 10 },  // date PLACEHOLDER
-    { date: "2026-12-05", venue: "Toyo Open Mic",                  city: "Colchester, CT", note: "Open mic", ticketUrl: "", setMinutes: 7 },  // date PLACEHOLDER
-    { date: "2026-12-19", venue: "Concrete Gardens",               city: "Hartford, CT", note: "", ticketUrl: "", setMinutes: 10 },  // date PLACEHOLDER
+    { date: "2026-11-18", venue: "Toyo Open Mic",                  city: "Colchester, CT", note: "Open mic", ticketUrl: "", setMinutes: 7 },
+    { date: "2026-11-18", venue: "Koncrete Gardens",               city: "Hartford, CT", note: "", ticketUrl: "", setMinutes: 10 },
+    { date: "2026-12-03", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "", ticketUrl: "", setMinutes: 10 },
     { date: "2027-01-16", venue: "Madison Square Garden",          city: "New York, NY", note: "Someday", ticketUrl: "", setMinutes: 60 },
 
     // Past shows (fans can mark these "I was there")
