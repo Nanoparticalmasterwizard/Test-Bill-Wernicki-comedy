@@ -63,18 +63,18 @@ h1, h2, h3 { margin: 0; }
   transition: background .25s ease;
 }
 .nav.is-solid { background: rgba(11,11,12,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-.nav__logo { display: inline-flex; align-items: center; gap: 10px; font: 400 24px/1 var(--display); letter-spacing: .04em; text-decoration: none; }
+.nav__logo { display: inline-flex; align-items: center; gap: 12px; font: 400 26px/1 var(--display); letter-spacing: .03em; text-decoration: none; }
+.nav__logo img { width: 42px; height: 42px; }
 .nav__logo img, .fancard__brand img, .footer__name img { border-radius: 50%; flex: none; }
 .nav__links { display: flex; gap: 28px; align-items: center; }
 .nav__links a {
-  font: 600 13px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+  font: 800 14px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
   padding: 8px 0; border-bottom: 2px solid transparent;
 }
 .nav__links a:hover, .nav__links a.is-active { border-color: var(--accent); }
 .nav__links .nav__cta { background: var(--accent); color: var(--accent-ink); padding: 10px 16px; border: 0; }
 .nav__toggle { display: none; }
-@media (max-width: 420px) { .nav__logo { font-size: 20px; gap: 8px; } .nav__logo img { width: 32px; height: 32px; } }
-.hero__title .hero__comedy { display: block; color: var(--accent); font-size: .5em; line-height: 1.05; letter-spacing: .06em; }
+@media (max-width: 420px) { .nav__logo { font-size: 21px; gap: 9px; } .nav__logo img { width: 34px; height: 34px; } }
 
 @media (max-width: 820px) {
   .nav__toggle {
@@ -125,7 +125,6 @@ h1, h2, h3 { margin: 0; }
       linear-gradient(to top, var(--bg) 0%, rgba(11,11,12,0) 35%, rgba(11,11,12,0) 80%, rgba(11,11,12,.6));
   }
   .eyebrow::before { content: ""; width: 28px; height: 3px; background: var(--accent); }
-.hero__title { font-size: clamp(96px, 11.5vw, 180px); }
 }
 @keyframes heroIn { from { transform: scale(1.12); opacity: 0; } to { transform: scale(1.04); opacity: 1; } }
 
@@ -135,11 +134,18 @@ h1, h2, h3 { margin: 0; }
   margin: 0 0 12px; color: var(--text); text-shadow: 0 1px 12px rgba(0,0,0,.8);
   font: 800 13px/1 var(--body); letter-spacing: .3em; text-transform: uppercase;
 }
+/* Hero lockup: three lines at one size. --lockup is the width of WERNICKI;
+   COMEDY is tracked out to land on exactly the same width (Anton metrics). */
 .hero__title {
-  font: 400 clamp(72px, 17vw, 220px)/.9 var(--display);
-  text-transform: uppercase; letter-spacing: .005em;
+  --lockup: min(calc(100vw - 2 * var(--gutter)), 520px);
+  width: fit-content; margin: 0;
+  font: 400 calc(var(--lockup) / 3.5)/.92 var(--display);
+  text-transform: uppercase; letter-spacing: 0;
   text-shadow: 0 6px 40px rgba(0,0,0,.5);
 }
+.hero__title > span { display: block; }
+.hero__title .hero__comedy { color: var(--accent); letter-spacing: .088em; margin-right: -.088em; padding-top: .04em; }
+@media (min-width: 900px) { .hero__title { --lockup: clamp(400px, 32vw, 560px); } }
 .hero__tag { max-width: 34ch; margin: 20px 0 28px; font-size: clamp(16px, 2vw, 20px); color: #dcd7cd; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
