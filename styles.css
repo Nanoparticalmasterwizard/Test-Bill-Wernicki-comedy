@@ -446,3 +446,10 @@ h1, h2, h3 { margin: 0; }
 /* Stats hidden for now (no media yet): delete this rule to bring back the
    "I was there" buttons and the Past shows hint. */
 .btn--attend, .past__hint { display: none !important; }
+
+/* Phones: "Next up" tag sits on its own line above long venue names */
+@media (max-width: 600px) {
+  .show__venue { display: flex; flex-wrap: wrap; align-items: center; column-gap: 10px; row-gap: 6px; }
+  .show__nextup { margin: 0 100% 2px 0; white-space: nowrap; flex: none; }
+  .show__note { margin-left: 0; vertical-align: 0; white-space: nowrap; flex: none; }
+}
