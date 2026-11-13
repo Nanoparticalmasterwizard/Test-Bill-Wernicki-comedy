@@ -4,22 +4,22 @@ PRODID:-//Bill Wernicki Comedy//Shows//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
-UID:2026-11-18-toyo@billwernickicomedy.com
+UID:2026-11-18-toyo-hibachi-asian-fusion@billwernickicomedy.com
 DTSTAMP:20261118T000000Z
 DTSTART;TZID=America/New_York:20261118T190000
 DTEND;TZID=America/New_York:20261118T210000
-SUMMARY:Bill Wernicki Comedy at Toyo
-LOCATION:Toyo\, Colchester\, CT
+SUMMARY:Bill Wernicki Comedy at Toyo Hibachi & Asian Fusion
+LOCATION:Toyo Hibachi & Asian Fusion\, Colchester\, CT
 DESCRIPTION:More: https://billwernickicomedy.com/
 URL:https://billwernickicomedy.com/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Bill Wernicki Comedy at Toyo
+DESCRIPTION:Bill Wernicki Comedy at Toyo Hibachi & Asian Fusion
 TRIGGER:-P1D
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Bill Wernicki Comedy at Toyo
+DESCRIPTION:Bill Wernicki Comedy at Toyo Hibachi & Asian Fusion
 TRIGGER:-PT3H
 END:VALARM
 END:VEVENT
