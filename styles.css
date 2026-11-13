@@ -453,3 +453,12 @@ h1, h2, h3 { margin: 0; }
   .show__nextup { margin: 0 100% 2px 0; white-space: nowrap; flex: none; }
   .show__note { margin-left: 0; vertical-align: 0; white-space: nowrap; flex: none; }
 }
+
+/* Newsletter: optional city field */
+.signup__opt { font-weight: 600; letter-spacing: .08em; text-transform: none; opacity: .8; }
+.signup__city {
+  width: 100%; padding: 0 16px; min-height: 54px; margin-bottom: 6px;
+  font: 400 16px/1 var(--body); color: var(--text); background: var(--bg-2);
+  border: 2px solid var(--line); border-radius: 0;
+}
+.signup__city:focus { outline: none; border-color: var(--accent); }

@@ -11,9 +11,16 @@
 
   // Post to Brevo in the background. Read its answer when the browser allows it;
   // otherwise send it blind and assume it went through.
-  function post(email) {
+  // city is optional and lands in Brevo's CITY contact attribute. If Brevo
+  // turns it down (attribute or form field missing), retry with email only.
+  function post(email, city) {
+    if (city) return send(email, city).then(function (res) { return res === "error" ? send(email) : res; });
+    return send(email);
+  }
+  function send(email, city) {
     var body = new FormData();
     body.append("EMAIL", email);
+    if (city) body.append("CITY", city);
     body.append("email_address_check", "");
     body.append("locale", "en");
     var url = cfg.action + (cfg.action.indexOf("?") < 0 ? "?" : "&") + "isAjax=1";
@@ -27,6 +34,7 @@
 
   document.querySelectorAll("form[data-signup]").forEach(function (form) {
     var input = form.querySelector('input[type="email"]');
+    var cityInput = form.querySelector(".signup__city");
     var btn = form.querySelector('button[type="submit"]');
     var msg = form.querySelector(".signup__msg");
     function say(text, kind) { msg.textContent = text; msg.className = "signup__msg" + (kind ? " is-" + kind : ""); }
@@ -50,7 +58,7 @@
       }
       btn.disabled = true;
       say("Adding you...", "");
-      post(email)
+      post(email, cityInput ? cityInput.value.trim().slice(0, 80) : "")
         .then(function (res) {
           if (res === "error") return say("That didn't go through. Check the email and try again?", "err");
           say(cfg.confirmEmail ? "Almost done. Check your inbox and tap the link to confirm."
