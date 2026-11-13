@@ -19,11 +19,11 @@
   <link rel="stylesheet" href="styles.css?v=26">
   <script>
     /* Hero name intro: hold the lines back until the display font is ready, then
-       slam them in (a gentle fade with Reduce Motion on). Never waits more than 1.2s. */
+       settle them in, COMEDY with a red glow. Never waits more than 1.2s. */
     (function () {
       var d = document.documentElement;
       d.classList.add("intro");
-      if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("intro-calm");
+      d.classList.add("intro-calm"); /* the settle + COMEDY glow is the intro for everyone */
       var go = function () { d.classList.add("intro-go"); };
       setTimeout(go, 1200);
       if (document.fonts && document.fonts.load) document.fonts.load("400 100px Anton").then(go, go);
