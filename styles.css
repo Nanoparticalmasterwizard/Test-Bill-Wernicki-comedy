@@ -462,3 +462,9 @@ h1, h2, h3 { margin: 0; }
   border: 2px solid var(--line); border-radius: 0;
 }
 .signup__city:focus { outline: none; border-color: var(--accent); }
+
+/* Phones: hero buttons share one row, each half width; they stack on very small screens */
+@media (max-width: 600px) {
+  .hero__actions { gap: 10px; }
+  .hero__actions .btn { flex: 1 1 0; min-width: max-content; padding-left: 14px; padding-right: 14px; letter-spacing: .06em; text-align: center; justify-content: center; }
+}
