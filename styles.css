@@ -424,3 +424,7 @@ h1, h2, h3 { margin: 0; }
 @media (max-width: 600px) {
   .hero { min-height: calc(100vh - 48px); min-height: calc(100svh - 48px); padding-bottom: 32px; }
 }
+
+/* Stats hidden for now (no media yet): delete this rule to bring back the
+   "I was there" buttons and the Past shows hint. */
+.btn--attend, .past__hint { display: none !important; }
