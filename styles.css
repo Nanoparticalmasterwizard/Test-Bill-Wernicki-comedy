@@ -433,6 +433,7 @@ h1, h2, h3 { margin: 0; }
 .contact__status { min-height: 1.4em; margin: 10px 0 0; font-size: 14px; }
 .contact__status.is-ok { color: var(--text); }
 .contact__status.is-err { color: #fff; font-weight: 600; }
+.contact__status a { color: inherit; text-decoration: underline; word-break: break-all; }
 
 @media (max-width: 600px) {
   .contact__row a, .contact__row b { font-size: clamp(18px, 6vw, 26px); }
