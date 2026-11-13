@@ -505,7 +505,7 @@ h1, h2, h3 { margin: 0; }
 /* Reduce Motion on: same beats, a softer hit. Each line settles from a touch big
    (1.06) with a crisp fade, COMEDY lands with a quick red glow. No blur, shake or jolt. */
 .intro-calm.intro-go .hero__title > span { animation-name: settle; animation-duration: .38s; animation-timing-function: cubic-bezier(.2,.9,.3,1); }
-.intro-calm.intro-go .hero__title > .hero__comedy { animation-name: settleHot; animation-duration: 1.7s; animation-timing-function: cubic-bezier(.2,.9,.3,1); }
+.intro-calm.intro-go .hero__title > .hero__comedy { animation-name: settleHot; animation-duration: 2.8s; animation-timing-function: linear; }
 .intro-calm.intro-go .hero__title { animation: none; }
 .intro-calm.intro-go .eyebrow, .intro-calm.intro-go .hero__tag,
 .intro-calm.intro-go .hero__actions, .intro-calm.intro-go .hero__next { animation-name: fadeIn; }
@@ -516,8 +516,23 @@ h1, h2, h3 { margin: 0; }
   100% { opacity: 1; transform: none; }
 }
 @keyframes settleHot {
-  0%   { opacity: 0; transform: scale(1.08); text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 0 rgba(var(--accent-rgb),0); }
-  15%  { opacity: 1; transform: scale(1); text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 28px rgba(var(--accent-rgb),.85); }
-  55%  { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 24px rgba(var(--accent-rgb),.75); }
-  100% { opacity: 1; transform: none; text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 0 rgba(var(--accent-rgb),0); }
+  /* glow lands hot, holds, then an exponential tail that spreads as it fades to exactly 0 */
+  0%   { opacity: 0; transform: scale(1.08); text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 20px rgba(var(--accent-rgb),0); animation-timing-function: cubic-bezier(.2,.9,.3,1); }
+  9%   { opacity: 1; transform: scale(1); text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 26px rgba(var(--accent-rgb),.85); }
+  32%  { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 30px rgba(var(--accent-rgb),.78); }
+  36.9% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 38px rgba(var(--accent-rgb),0.575); }
+  41.7% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 46px rgba(var(--accent-rgb),0.423); }
+  46.6% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 53px rgba(var(--accent-rgb),0.31); }
+  51.4% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 59px rgba(var(--accent-rgb),0.227); }
+  56.3% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 65px rgba(var(--accent-rgb),0.165); }
+  61.1% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 70px rgba(var(--accent-rgb),0.119); }
+  66% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 75px rgba(var(--accent-rgb),0.085); }
+  70.9% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 79px rgba(var(--accent-rgb),0.06); }
+  75.7% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 82px rgba(var(--accent-rgb),0.041); }
+  80.6% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 85px rgba(var(--accent-rgb),0.028); }
+  85.4% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 87px rgba(var(--accent-rgb),0.017); }
+  90.3% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 89px rgba(var(--accent-rgb),0.01); }
+  95.1% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 90px rgba(var(--accent-rgb),0.004); }
+  100% { opacity: 1; transform: none; text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 90px rgba(var(--accent-rgb),0); }
+}
 }
