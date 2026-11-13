@@ -42,16 +42,22 @@ window.SITE = {
    * minutes is the clip length; My Stats counts it when someone plays it.
    */
   clips: [
-    { title: "Live at Comix Roadhouse", instagramUrl: "https://www.instagram.com/p/DdseBH1THzq/", thumb: "img/bill-comix.jpg", minutes: 1, featured: true },
-    { title: "More clips on the way", youtubeId: "" },
+    // vertical: true marks a YouTube Short (tall 9:16 tile).
+    { title: "Live at Comix Roadhouse",             youtubeId: "7me0z_dEd7c", vertical: true },
+    { title: "Made Timmy No Brakes laugh",          youtubeId: "ATlGfxXeHLk", vertical: true },
+    { title: "Russell Brand and the Minions",       youtubeId: "totqPqhek44", vertical: true },
+    { title: "Hey Toyo set, 11/4",                  youtubeId: "5FCxjrDLaAQ", vertical: true },
   ],
+  // "More on YouTube" link under the clips. Empty hides it.
+  youtubeChannel: "https://www.youtube.com/@yungbill99",
 
   // Social links. Delete a line to hide it.
   socials: [
     { name: "Instagram", handle: "@billwernickicomedy", url: "https://www.instagram.com/billwernickicomedy/" },
+    { name: "YouTube",   handle: "@yungbill99",         url: "https://www.youtube.com/@yungbill99" },
     // Add more when they exist, e.g.:
     // { name: "TikTok",  handle: "@billwernickicomedy", url: "https://www.tiktok.com/@billwernickicomedy" },
-    // { name: "YouTube", handle: "Bill Wernicki",       url: "https://www.youtube.com/@..." },
+
   ],
 
   /*

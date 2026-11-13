@@ -578,3 +578,21 @@ h1, h2, h3 { margin: 0; }
   95.1% { opacity: 0.005; transform: translateY(-50%) scaleX(1.299); }
   100% { opacity: 0; transform: translateY(-50%) scaleX(1.300); }
 }
+
+/* Clips as a reel of tall tiles (YouTube Shorts) */
+.clips.clips--reel { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.clips--reel .clip.clip--tall { grid-column: auto; grid-row: auto; }
+.clips--reel .clip--tall .clip__frame,
+.clips--reel .clip--tall .clip__frame:has(iframe) { aspect-ratio: 9 / 16; height: auto; background: #000; }
+.clips--reel .clip--tall .clip__frame img { object-position: 50% 50% !important; }
+.clips--reel .clip--tall .clip__title { font-size: 18px; }
+.clips--reel .clip--tall .clip__soon { top: auto; bottom: 12px; }
+.clips__more { margin-top: 24px; }
+.clips__more a { color: var(--text); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; font-size: 14px; text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 3px; }
+.clips__more a:hover { color: var(--accent); }
+@media (max-width: 900px) {
+  .clips.clips--reel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
+    margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 6px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .clips.clips--reel::-webkit-scrollbar { display: none; }
+  .clips--reel .clip--tall { flex: 0 0 min(58vw, 240px); scroll-snap-align: start; }
+}
