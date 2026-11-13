@@ -16,7 +16,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=23">
+  <script>
+    /* Hero name intro: hold the lines back until the display font is ready, then
+       slam them in. Skipped for reduced motion; never waits more than 1.2s. */
+    (function () {
+      var d = document.documentElement;
+      if (!window.matchMedia || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      d.classList.add("intro");
+      var go = function () { d.classList.add("intro-go"); };
+      setTimeout(go, 1200);
+      if (document.fonts && document.fonts.load) document.fonts.load("400 100px Anton").then(go, go);
+    })();
+  </script>
 </head>
 <body id="top">
   <a class="skip" href="#shows">Skip to shows</a>

@@ -468,3 +468,36 @@ h1, h2, h3 { margin: 0; }
   .hero__actions { gap: 10px; }
   .hero__actions .btn { flex: 1 1 0; min-width: max-content; padding-left: 14px; padding-right: 14px; letter-spacing: .06em; text-align: center; justify-content: center; }
 }
+
+/* ---------- Hero name intro: BILL ... WERNICKI ... COMEDY ----------
+   Each line slams down from oversized and settles; COMEDY lands hardest and
+   jolts the block. Then the rest of the hero fades up. About 1.4s total. */
+.intro .hero__title > span,
+.intro .eyebrow, .intro .hero__tag, .intro .hero__actions, .intro .hero__next { opacity: 0; }
+.intro-go .hero__title > span { transform-origin: 0 80%; animation: slam .42s cubic-bezier(.2,.9,.25,1) both; }
+.intro-go .hero__title > span:nth-child(1) { animation-delay: .05s; }
+.intro-go .hero__title > span:nth-child(2) { animation-delay: .38s; }
+.intro-go .hero__title > .hero__comedy { animation: slamHard .5s cubic-bezier(.2,.9,.25,1) .74s both; }
+.intro-go .hero__title { animation: jolt .32s ease-out 1.02s both; }
+.intro-go .eyebrow { animation: rise .5s ease-out 1.15s both; }
+.intro-go .hero__tag { animation: rise .5s ease-out 1.25s both; }
+.intro-go .hero__actions { animation: rise .5s ease-out 1.35s both; }
+.intro-go .hero__next { animation: rise .5s ease-out 1.45s both; }
+@keyframes slam {
+  0%   { opacity: 0; transform: scale(1.6); filter: blur(6px); }
+  55%  { opacity: 1; transform: scale(.97); filter: blur(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slamHard {
+  0%   { opacity: 0; transform: scale(2.1) rotate(-2deg); filter: blur(8px); }
+  55%  { opacity: 1; transform: scale(.94) rotate(0); filter: blur(0); }
+  75%  { transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes jolt {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-4px, 3px); }
+  45% { transform: translate(3px, -2px); }
+  70% { transform: translate(-2px, 1px); }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
