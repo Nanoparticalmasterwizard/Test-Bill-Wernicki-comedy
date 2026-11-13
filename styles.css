@@ -546,17 +546,17 @@ h1, h2, h3 { margin: 0; }
   .hero__actions .btn { flex-basis: 100%; }
 }
 
-/* COMEDY glow streak: a soft horizontal line through the word's middle that tapers
+/* COMEDY glow streak (behind the letters): a soft horizontal line through the word's middle that tapers
    to thin points at both ends (scanner-line feel), fading out on the same wispy tail. */
 .hero__title .hero__comedy { position: relative; isolation: isolate; }
 .hero__title .hero__comedy::after {
-  content: ""; position: absolute; z-index: 1; pointer-events: none; mix-blend-mode: screen;
-  left: -12%; right: -12%; top: 50%; height: .34em;
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: -75%; right: -75%; top: 50%; height: .18em;
   transform: translateY(-50%);
-  background: radial-gradient(50% 50% at 50% 50%, rgba(255,170,140,.85) 0%, rgba(var(--accent-rgb),.6) 30%, rgba(var(--accent-rgb),.2) 62%, rgba(var(--accent-rgb),0) 100%);
-  -webkit-mask: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%), linear-gradient(transparent 0%, #000 30%, #000 70%, transparent 100%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255,160,130,1) 0%, rgba(var(--accent-rgb),.85) 25%, rgba(var(--accent-rgb),.3) 60%, rgba(var(--accent-rgb),0) 100%);
+  -webkit-mask: linear-gradient(90deg, transparent 0%, #000 30%, #000 70%, transparent 100%), linear-gradient(transparent 0%, #000 35%, #000 65%, transparent 100%);
   -webkit-mask-composite: source-in; mask-composite: intersect;
-  filter: blur(8px); opacity: 0;
+  filter: blur(4px); opacity: 0;
 }
 .intro-calm.intro-go .hero__title .hero__comedy::after { animation: streak 2.8s linear .74s both; }
 @keyframes streak {
