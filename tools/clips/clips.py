@@ -3,8 +3,10 @@
 
   clips.py analyze VIDEO [--out DIR] [--model small.en]
       -> DIR/transcript.txt (compact, for picking clips) and DIR/data.json
+  clips.py captions DIR
+      -> DIR/captions.txt draft, one caption card per line, for the model to rewrite
   clips.py render DIR
-      reads DIR/clips.json, writes DIR/clips/*.mp4, DIR/review.txt, DIR/review.jpg
+      reads DIR/clips.json and DIR/captions.txt, writes DIR/clips/*.mp4, DIR/review.txt, DIR/review.jpg
 
 See README.md in this folder for the full procedure.
 """
@@ -141,28 +143,86 @@ def ass_time(t):
     return "%d:%02d:%05.2f" % (t // 3600, t % 3600 // 60, t % 60)
 
 
-def write_ass(path, words, s, e):
-    head = ("[Script Info]\nScriptType: v4.00+\nPlayResX: %d\nPlayResY: %d\nWrapStyle: 2\n\n"
+def clip_name(n, c):
+    return "%02d-%s" % (n, re.sub(r"[^a-z0-9]+", "-", c["name"].lower()).strip("-"))
+
+
+def auto_cards(ws):
+    """Fallback line breaks: split on punctuation, pauses and length."""
+    cards, cur = [], []
+    for w in ws:
+        if cur and (len(cur) >= CAP_MAX_WORDS or len(" ".join(cur + [w["w"]])) > CAP_MAX_CHARS
+                    or w["s"] - prev > 0.5 or re.search(r"[.?!,]$", cur[-1])):
+            cards.append(" ".join(cur))
+            cur = []
+        cur.append(w["w"])
+        prev = w["e"]
+    return cards + ([" ".join(cur)] if cur else [])
+
+
+def captions(a):
+    """Write a draft captions.txt for the model to rewrite."""
+    d = json.load(open(os.path.join(a.dir, "data.json")))
+    clips = json.load(open(os.path.join(a.dir, "clips.json")))
+    out = []
+    for n, c in enumerate(clips, 1):
+        bounds(c, d)
+        i0, i1 = c["_i"]
+        out.append("# " + clip_name(n, c))
+        out += auto_cards(d["words"][i0: i1 + 1]) + [""]
+    open(os.path.join(a.dir, "captions.txt"), "w").write("\n".join(out))
+    print("wrote draft %s/captions.txt - rewrite it (see README step 5)" % a.dir)
+
+
+def read_captions(path):
+    caps, name = {}, None
+    if os.path.exists(path):
+        for line in open(path):
+            line = line.strip()
+            if line.startswith("#"):
+                name = line[1:].strip()
+                caps[name] = []
+            elif line and name:
+                caps[name].append(line)
+    return caps
+
+
+def norm(w):
+    return re.sub(r"[^a-z0-9]", "", w.lower())
+
+
+def time_cards(cards, ws):
+    """Line the edited caption words up with the transcriber's word timings.
+    Returns [(start, end, text)] and how much of the text matched (0-1)."""
+    import difflib
+    new = [(ci, w) for ci, card in enumerate(cards) for w in card.split()]
+    sm = difflib.SequenceMatcher(None, [norm(w["w"]) for w in ws], [norm(w) for _, w in new], autojunk=False)
+    idx = [0] * len(new)
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        for j in range(j1, j2):
+            if tag == "equal":
+                idx[j] = i1 + (j - j1)
+            else:  # changed words: spread across the stretch they replaced
+                idx[j] = min(max(i1 + (j - j1) * max(i2 - i1, 1) // max(j2 - j1, 1), 0), len(ws) - 1)
+    timed = []
+    for ci, card in enumerate(cards):
+        js = [j for j, (c2, _) in enumerate(new) if c2 == ci]
+        if js:
+            timed.append([ws[idx[js[0]]]["s"], ws[idx[js[-1]]]["e"], card])
+    return timed, sm.ratio()
+
+
+def write_ass(path, timed, s, e):
+    head = ("[Script Info]\nScriptType: v4.00+\nPlayResX: %d\nPlayResY: %d\nWrapStyle: 0\n\n"
             "[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, OutlineColour, BackColour, Bold, "
             "BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV\n"
-            "Style: C,%s,%d,&H00FFFFFF,&H00000000,&H80000000,1,1,6,2,2,60,60,%d\n\n"
+            "Style: C,%s,%d,&H00FFFFFF,&H00000000,&H80000000,1,1,6,2,2,70,70,%d\n\n"
             "[Events]\nFormat: Layer, Start, End, Style, Text\n") % (W, H, CAP_FONT, CAP_SIZE, CAP_MARGIN_BOTTOM)
-    ws = words
-    chunks, cur = [], []
-    for w in ws:
-        if cur and (len(cur) >= CAP_MAX_WORDS or len(" ".join(x["w"] for x in cur + [w])) > CAP_MAX_CHARS
-                    or w["s"] - cur[-1]["e"] > 0.5 or re.search(r"[.?!,]$", cur[-1]["w"])):
-            chunks.append(cur)
-            cur = []
-        cur.append(w)
-    if cur:
-        chunks.append(cur)
     lines = []
-    for i, ch in enumerate(chunks):
-        t0 = ch[0]["s"] - s
-        t1 = min(ch[-1]["e"] - s + 0.6, (chunks[i + 1][0]["s"] - s) if i + 1 < len(chunks) else e - s)
-        text = " ".join(x["w"] for x in ch).rstrip(",.")
-        lines.append("Dialogue: 0,%s,%s,C,%s" % (ass_time(max(t0, 0)), ass_time(t1), text))
+    for i, (t0, t1, text) in enumerate(timed):
+        nxt = timed[i + 1][0] if i + 1 < len(timed) else e
+        t1 = max(min(t1 + 0.7, nxt), t0 + 0.3)
+        lines.append("Dialogue: 0,%s,%s,C,%s" % (ass_time(max(t0 - s, 0)), ass_time(min(t1, e) - s), text))
     open(path, "w").write(head + "\n".join(lines) + "\n")
 
 
@@ -178,14 +238,18 @@ def render(a):
     clips = json.load(open(os.path.join(a.dir, "clips.json")))
     out = os.path.join(a.dir, "clips")
     os.makedirs(out, exist_ok=True)
+    caps = read_captions(os.path.join(a.dir, "captions.txt"))
     db, floor, words = np.array(d["db"]), d["floor"], d["words"]
     report, rows = [], []
     for n, c in enumerate(clips, 1):
         s, e = bounds(c, d)
         dur = e - s
-        name = "%02d-%s" % (n, re.sub(r"[^a-z0-9]+", "-", c["name"].lower()).strip("-"))
+        name = clip_name(n, c)
         mp4, ass = os.path.join(out, name + ".mp4"), os.path.join(out, name + ".ass")
-        write_ass(ass, words[c["_i"][0]: c["_i"][1] + 1], s, e)
+        cw = words[c["_i"][0]: c["_i"][1] + 1]
+        cards = caps.get(name) or auto_cards(cw)
+        timed, match = time_cards(cards, cw)
+        write_ass(ass, timed, s, e)
         vf = ("[0:v]scale=%d:%d:force_original_aspect_ratio=increase,crop=%d:%d,fps=%d,ass='%s'[v];"
               "[1:v]scale=%d:%d,format=rgba,colorchannelmixer=aa=%s[l];[v][l]overlay=W-w-%d:%d[vo];"
               "[0:a]loudnorm=I=-14:TP=-1.5:LRA=11,afade=t=in:d=0.05,afade=t=out:st=%.2f:d=%.2f[ao]") % (
@@ -198,6 +262,13 @@ def render(a):
         os.remove(ass)
         # ---- automatic checks ----
         flags = []
+        if name not in caps:
+            flags.append("NO HAND-WRITTEN CAPTIONS, used automatic breaks")
+        elif match < 0.7:
+            flags.append("CAPTIONS DON'T MATCH AUDIO WELL (%d%%), check wording and that the clip's lines cover start to end" % (match * 100))
+        long = [t for _, _, t in timed if len(t) > 44]
+        if long:
+            flags.append("CAPTION TOO LONG: " + long[0])
         i0, i1 = c.pop("_i")
         inside = words[i0: i1 + 1]
         cut = [w["w"] for w in words[:i0] + words[i1 + 1:] if w["s"] < e and w["e"] > s]
@@ -263,7 +334,8 @@ def render(a):
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
     sub = p.add_subparsers(dest="cmd", required=True)
-    x = sub.add_parser("analyze"); x.add_argument("video"); x.add_argument("--out"); x.add_argument("--model", default="small.en")
+    x = sub.add_parser("analyze"); x.add_argument("video"); x.add_argument("--out"); x.add_argument("--model", default="medium.en")
+    x = sub.add_parser("captions"); x.add_argument("dir")
     x = sub.add_parser("render"); x.add_argument("dir")
     a = p.parse_args()
-    analyze(a) if a.cmd == "analyze" else render(a)
+    {"analyze": analyze, "captions": captions, "render": render}[a.cmd](a)
