@@ -505,7 +505,7 @@ h1, h2, h3 { margin: 0; }
 /* Reduce Motion on: same beats, a softer hit. Each line settles from a touch big
    (1.06) with a crisp fade, COMEDY lands with a quick red glow. No blur, shake or jolt. */
 .intro-calm.intro-go .hero__title > span { animation-name: settle; animation-duration: .38s; animation-timing-function: cubic-bezier(.2,.9,.3,1); }
-.intro-calm.intro-go .hero__title > .hero__comedy { animation-name: settleHot; animation-duration: .7s; animation-timing-function: cubic-bezier(.2,.9,.3,1); }
+.intro-calm.intro-go .hero__title > .hero__comedy { animation-name: settleHot; animation-duration: 1.7s; animation-timing-function: cubic-bezier(.2,.9,.3,1); }
 .intro-calm.intro-go .hero__title { animation: none; }
 .intro-calm.intro-go .eyebrow, .intro-calm.intro-go .hero__tag,
 .intro-calm.intro-go .hero__actions, .intro-calm.intro-go .hero__next { animation-name: fadeIn; }
@@ -517,6 +517,7 @@ h1, h2, h3 { margin: 0; }
 }
 @keyframes settleHot {
   0%   { opacity: 0; transform: scale(1.08); text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 0 rgba(var(--accent-rgb),0); }
-  35%  { opacity: 1; transform: scale(1); text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 28px rgba(var(--accent-rgb),.85); }
+  15%  { opacity: 1; transform: scale(1); text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 28px rgba(var(--accent-rgb),.85); }
+  55%  { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 24px rgba(var(--accent-rgb),.75); }
   100% { opacity: 1; transform: none; text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 0 rgba(var(--accent-rgb),0); }
 }
