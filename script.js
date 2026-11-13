@@ -108,20 +108,43 @@
   if (!upcoming.length) {
     list.innerHTML = '<li class="shows__empty">New dates coming soon. Follow on Instagram to hear first, or <a href="#contact">book Bill</a>.</li>';
   } else {
-    list.innerHTML = upcoming.map(function (s) {
+    list.innerHTML = upcoming.map(function (s, i) {
       var cta = s.tickets === false ? ""
         : s.ticketUrl
         ? '<a class="btn btn--primary btn--sm" href="' + esc(s.ticketUrl) + '" target="_blank" rel="noopener">Tickets</a>'
         : '<span class="btn btn--ghost btn--sm" aria-disabled="true">Tickets soon</span>';
       var remind = '<a class="btn btn--ghost btn--sm btn--remind" href="' + esc(calendarHref(s)) + '"' +
         (isApple ? "" : ' target="_blank" rel="noopener"') + ' aria-label="Add ' + esc(s.venue) + ' to your calendar">Remind me</a>';
-      return '<li class="show reveal">' + dateBlock(s) + info(s) + '<div class="show__cta">' + cta + remind + '</div></li>';
+      var first = i === 0;
+      return '<li class="show reveal' + (first ? ' show--next" id="next-show' : '') + '">' + dateBlock(s) +
+        info(s).replace('<div class="show__venue">', first ? '<div class="show__venue"><span class="show__nextup">Next up</span>' : '<div class="show__venue">') +
+        '<div class="show__cta">' + cta + remind + '</div></li>';
     }).join("");
 
     var n = upcoming[0];
     var next = $("#hero-next");
     next.hidden = false;
+    next.setAttribute("href", "#next-show");
     $(".hero__next-body", next).textContent = MON[n.d.getMonth()] + " " + n.d.getDate() + " · " + n.city;
+  }
+
+  // Links to the next show (hero card, "See him live") land with a quick red
+  // pulse on that entry so it's obvious which one is next.
+  var nextEl = $("#next-show");
+  if (nextEl) {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest('a[href="#next-show"], .hero a[href="#shows"]');
+      if (!a) return;
+      var done = false;
+      function flash() {
+        if (done) return; done = true;
+        nextEl.classList.remove("is-flash"); void nextEl.offsetWidth;
+        nextEl.classList.add("is-flash");
+        setTimeout(function () { nextEl.classList.remove("is-flash"); }, 2200);
+      }
+      if ("onscrollend" in window) addEventListener("scrollend", flash, { once: true });
+      setTimeout(flash, 900);
+    });
   }
 
   var pastList = $("#past-list");

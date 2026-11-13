@@ -200,6 +200,24 @@ h1, h2, h3 { margin: 0; }
   transition: background .15s ease, padding .15s ease;
 }
 .show:hover { background: rgba(255,255,255,.03); }
+/* Next show: a small "Next up" tag, plus a red pulse when a link lands on it */
+.show--next { position: relative; scroll-margin-top: 160px; }
+.show__nextup {
+  display: inline-block; vertical-align: middle; margin-right: 10px; padding: 4px 8px 3px;
+  background: var(--accent); color: var(--accent-ink);
+  font: 800 11px/1 var(--body); letter-spacing: .14em; text-transform: uppercase;
+}
+.show--next::before, .show--next::after { content: ""; position: absolute; pointer-events: none; opacity: 0; }
+.show--next::before { left: -14px; top: 10px; bottom: 10px; width: 3px; background: var(--accent); transform: scaleY(0); }
+.show--next::after { inset: 0 -14px; background: linear-gradient(to right, rgba(var(--accent-rgb), .22), rgba(var(--accent-rgb), 0) 70%); }
+.show--next.is-flash::before { animation: nextBar 2.2s ease-out both; }
+.show--next.is-flash::after { animation: nextGlow 2.2s ease-out both; }
+@keyframes nextBar { 0% { opacity: 1; transform: scaleY(0); } 20% { transform: scaleY(1); } 75% { opacity: 1; transform: scaleY(1); } 100% { opacity: 0; transform: scaleY(1); } }
+@keyframes nextGlow { 0% { opacity: 0; } 15% { opacity: 1; } 35% { opacity: .55; } 50% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .show--next.is-flash::before { animation: none; opacity: 1; transform: none; }
+  .show--next.is-flash::after { animation: none; opacity: .7; }
+}
 .show__date { display: grid; justify-items: start; line-height: 1; }
 .show__mon { font: 800 13px/1 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
 .show__day { font: 400 52px/1 var(--display); }
