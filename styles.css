@@ -596,3 +596,7 @@ h1, h2, h3 { margin: 0; }
   .clips.clips--reel::-webkit-scrollbar { display: none; }
   .clips--reel .clip--tall { flex: 0 0 min(58vw, 240px); scroll-snap-align: start; }
 }
+/* Desktop: the hero is left-aligned, so keep the COMEDY streak close to the word */
+@media (min-width: 900px) {
+  .hero__title .hero__comedy::after { left: -22%; right: -22%; }
+}
