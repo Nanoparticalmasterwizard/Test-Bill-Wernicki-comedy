@@ -535,4 +535,13 @@ h1, h2, h3 { margin: 0; }
   95.1% { text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 90px rgba(var(--accent-rgb),0.004); }
   100% { opacity: 1; transform: none; text-shadow: 0 6px 40px rgba(0,0,0,.5), 0 0 90px rgba(var(--accent-rgb),0); }
 }
+
+/* Hero buttons: tighter tracking, a touch taller, equal halves on phones with room inside */
+.hero__actions .btn { min-height: 52px; padding: 0 28px; letter-spacing: .05em; font-size: 14px; }
+@media (max-width: 600px) {
+  .hero__actions { gap: 10px; }
+  .hero__actions .btn { flex: 1 1 0; min-width: 0; min-height: 50px; padding: 0 10px; font-size: 13px; letter-spacing: .035em; white-space: nowrap; }
+}
+@media (max-width: 340px) {
+  .hero__actions .btn { flex-basis: 100%; }
 }
