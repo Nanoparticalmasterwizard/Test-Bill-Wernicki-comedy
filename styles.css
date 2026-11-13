@@ -545,3 +545,36 @@ h1, h2, h3 { margin: 0; }
 @media (max-width: 340px) {
   .hero__actions .btn { flex-basis: 100%; }
 }
+
+/* COMEDY glow streak: a soft horizontal line through the word's middle that tapers
+   to thin points at both ends (scanner-line feel), fading out on the same wispy tail. */
+.hero__title .hero__comedy { position: relative; isolation: isolate; }
+.hero__title .hero__comedy::after {
+  content: ""; position: absolute; z-index: 1; pointer-events: none; mix-blend-mode: screen;
+  left: -12%; right: -12%; top: 50%; height: .34em;
+  transform: translateY(-50%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255,170,140,.85) 0%, rgba(var(--accent-rgb),.6) 30%, rgba(var(--accent-rgb),.2) 62%, rgba(var(--accent-rgb),0) 100%);
+  -webkit-mask: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%), linear-gradient(transparent 0%, #000 30%, #000 70%, transparent 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+  filter: blur(8px); opacity: 0;
+}
+.intro-calm.intro-go .hero__title .hero__comedy::after { animation: streak 2.8s linear .74s both; }
+@keyframes streak {
+  0%   { opacity: 0; transform: translateY(-50%) scaleX(.25); animation-timing-function: cubic-bezier(.2,.9,.3,1); }
+  9%   { opacity: 1; transform: translateY(-50%) scaleX(1); }
+  32%  { opacity: .92; transform: translateY(-50%) scaleX(1.04); }
+  36.9% { opacity: 0.678; transform: translateY(-50%) scaleX(1.076); }
+  41.7% { opacity: 0.499; transform: translateY(-50%) scaleX(1.109); }
+  46.6% { opacity: 0.366; transform: translateY(-50%) scaleX(1.139); }
+  51.4% { opacity: 0.267; transform: translateY(-50%) scaleX(1.167); }
+  56.3% { opacity: 0.194; transform: translateY(-50%) scaleX(1.193); }
+  61.1% { opacity: 0.14; transform: translateY(-50%) scaleX(1.215); }
+  66% { opacity: 0.1; transform: translateY(-50%) scaleX(1.235); }
+  70.9% { opacity: 0.071; transform: translateY(-50%) scaleX(1.252); }
+  75.7% { opacity: 0.049; transform: translateY(-50%) scaleX(1.267); }
+  80.6% { opacity: 0.032; transform: translateY(-50%) scaleX(1.279); }
+  85.4% { opacity: 0.02; transform: translateY(-50%) scaleX(1.288); }
+  90.3% { opacity: 0.012; transform: translateY(-50%) scaleX(1.295); }
+  95.1% { opacity: 0.005; transform: translateY(-50%) scaleX(1.299); }
+  100% { opacity: 0; transform: translateY(-50%) scaleX(1.300); }
+}
