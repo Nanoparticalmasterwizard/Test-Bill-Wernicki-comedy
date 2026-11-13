@@ -208,13 +208,15 @@
   function igId(url) { var m = /instagram\.com\/(?:[^\/]+\/)?(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/.exec(url || ""); return m && m[1]; }
   function clipKey(c) { return c.youtubeId || igId(c.instagramUrl) || ""; }
   var clipsEl = $("#clips");
+  var reel = (S.clips || []).some(function (c) { return c.vertical; });
+  if (reel) clipsEl.classList.add("clips--reel");
   clipsEl.innerHTML = (S.clips || []).map(function (c, i) {
     var ig = igId(c.instagramUrl);
     var playable = !!(c.youtubeId || ig);
     var thumb = c.thumb ? c.thumb : c.youtubeId ? "https://i.ytimg.com/vi/" + encodeURIComponent(c.youtubeId) + "/hqdefault.jpg" : PH[i % PH.length];
     var len = playable && c.minutes ? c.minutes + " min" : "";
     var badge = playable ? '<span class="clip__play"></span>' + (ig ? '<span class="clip__soon">Instagram</span>' : "") : '<span class="clip__soon">Coming soon</span>';
-    return '<figure class="clip reveal' + (c.featured ? " clip--featured" : "") + (ig ? " clip--ig" : "") + '">' +
+    return '<figure class="clip reveal' + (c.featured ? " clip--featured" : "") + (ig ? " clip--ig" : "") + (reel ? " clip--tall" : "") + '">' +
       '<button class="clip__frame" type="button" data-i="' + i + '" aria-label="Play ' + esc(c.title) + '"' + (playable ? "" : " disabled") + '>' +
       '<img src="' + thumb + '" alt="" loading="lazy" style="object-position:50% 35%">' + badge +
       '</button><figcaption><span class="clip__title">' + esc(c.title) + '</span><span class="clip__len">' + len + '</span></figcaption></figure>';
@@ -224,9 +226,11 @@
     if (!b || b.disabled) return;
     var c = S.clips[+b.dataset.i];
     var ig = igId(c.instagramUrl);
+    // In the tall reel, an Instagram tile is too small for Instagram's embed: open the post instead.
+    if (ig && reel) { window.open(c.instagramUrl, "_blank", "noopener"); store.watched[clipKey(c)] = c.minutes || 0; save(); renderCard(); return; }
     var src = ig
       ? "https://www.instagram.com/p/" + encodeURIComponent(ig) + "/embed/"
-      : "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(c.youtubeId) + "?autoplay=1&rel=0";
+      : "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(c.youtubeId) + "?autoplay=1&rel=0&playsinline=1";
     // Swap the button for a plain box: an iframe can't live inside a <button>.
     var box = document.createElement("div");
     box.className = "clip__frame clip__frame--playing";
@@ -236,6 +240,12 @@
     store.watched[clipKey(c)] = c.minutes || 0;
     save(); renderCard();
   });
+  if (S.youtubeChannel) {
+    var more = document.createElement("p");
+    more.className = "clips__more";
+    more.innerHTML = '<a href="' + esc(S.youtubeChannel) + '" target="_blank" rel="noopener">More clips on YouTube &rarr;</a>';
+    clipsEl.after(more);
+  }
 
   /* ---------- Socials ---------- */
   $("#socials").innerHTML = (S.socials || []).map(function (s) {
