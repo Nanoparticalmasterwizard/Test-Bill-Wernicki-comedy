@@ -30,8 +30,12 @@ so they don't follow someone to another device.
 
 ## Contact form
 
-There's no backend: "Send" opens the visitor's email app addressed to `bookingEmail`.
-To receive messages without that step, plug in a form service such as Formspree.
+"Send" posts the message from the page to FormSubmit, which relays it to `bookingEmail`.
+The form only says "Sent" when FormSubmit's reply confirms it. Otherwise (no connection, a timeout,
+an error, or FormSubmit saying the form still needs its one-time activation) it shows an error with a
+link that opens the visitor's email app addressed to `bookingEmail`, with their message filled in.
+FormSubmit sends an activation email to `bookingEmail` the first time the form is used; messages
+only go through after someone clicks "Activate Form" in it.
 
 ## After editing
 

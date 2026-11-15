@@ -311,9 +311,14 @@
     msg.textContent = "Stats cleared.";
   });
 
-  /* ---------- Contact form (opens the visitor's email app) ---------- */
-  // Booking form: sent from the page (FormSubmit relays it to bookingEmail),
-  // so visitors never get bounced into their email app.
+  /* ---------- Contact form (sent from the page through FormSubmit) ---------- */
+  // FormSubmit relays the message to bookingEmail, so visitors never get bounced
+  // into their email app. "Sent" only shows when FormSubmit's reply says the
+  // message was accepted. Anything else (a network error, a timeout, an error
+  // status, a reply that isn't JSON, success: false, or FormSubmit saying the
+  // form still needs its one-time activation) shows an error with a mailto link
+  // that already holds what the visitor typed, so nothing is lost.
+  var SEND_TIMEOUT_MS = 15000;
   $("#contact-form").addEventListener("submit", function (e) {
     e.preventDefault();
     var form = e.target, f = form.elements, btn = form.querySelector("button[type=submit]");
@@ -322,29 +327,61 @@
     if (!f.name.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) {
       return say("Add your name and a valid email so Bill can write back.", "err");
     }
+    var name = f.name.value.trim(), email = f.email.value.trim(), type = f.type.value, message = f.message.value;
+    var subject = type + " - from " + name;
+
+    function failed(reason) {
+      if (window.console && console.warn) console.warn("Booking form not sent:", reason);
+      var mailto = "mailto:" + S.bookingEmail +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(message + "\n\n" + name + "\n" + email);
+      var link = document.createElement("a");
+      link.href = mailto;
+      link.textContent = S.bookingEmail;
+      say("That didn't go through. Email Bill at ", "err");
+      status.appendChild(link);
+      status.appendChild(document.createTextNode(" instead. Your message is already filled in."));
+    }
+
     btn.disabled = true; say("Sending...", "");
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, SEND_TIMEOUT_MS) : null;
     fetch("https://formsubmit.co/ajax/" + S.bookingEmail, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
+      signal: ctrl ? ctrl.signal : undefined,
       body: JSON.stringify({
-        _subject: f.type.value + " - from " + f.name.value.trim(),
-        _replyto: f.email.value.trim(),
+        _subject: subject,
+        _replyto: email,
         _template: "table",
         _captcha: "false",
-        name: f.name.value.trim(),
-        email: f.email.value.trim(),
-        "What it's for": f.type.value,
-        message: f.message.value,
+        name: name,
+        email: email,
+        "What it's for": type,
+        message: message,
       }),
     })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (String(j.success) !== "true") throw new Error(j.message || "not sent");
+      .then(function (r) {
+        return r.text().then(function (t) {
+          var j = null;
+          try { j = JSON.parse(t); } catch (err) { /* not JSON: treated as not sent */ }
+          return { ok: r.ok, status: r.status, j: j };
+        });
+      })
+      .then(function (res) {
+        var j = res.j || {}, note = String(j.message || "");
+        if (!res.ok) throw new Error("HTTP " + res.status + (note ? ": " + note : ""));
+        if (!res.j) throw new Error("reply was not JSON");
+        if (String(j.success) !== "true") throw new Error(note || "success was not true");
+        // FormSubmit holds messages until the inbox owner clicks its activation email.
+        if (/activat/i.test(note)) throw new Error(note);
         form.reset();
         say("Sent. Bill will get back to you soon.", "ok");
       })
-      .catch(function () { say("That didn't send. Email " + S.bookingEmail + " directly instead.", "err"); })
-      .then(function () { btn.disabled = false; });
+      .catch(function (err) {
+        failed(err && err.name === "AbortError" ? "timed out after " + SEND_TIMEOUT_MS / 1000 + "s" : (err && err.message) || err);
+      })
+      .then(function () { if (timer) clearTimeout(timer); btn.disabled = false; });
   });
 
   /* ---------- Nav ---------- */
