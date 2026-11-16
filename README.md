@@ -49,3 +49,11 @@ Signups go to a Brevo subscription form (free plan) into the BWC list. Visitors 
 once double confirmation is on in Brevo (set `confirmEmail: true`), the confirm link should redirect to `https://billwernickicomedy.com/join/?confirmed=1`.
 Paste the form link (contains `sibforms.com/serve/`) into `newsletter.action` in `content.js`.
 To move elsewhere later, export the contact list from Brevo as CSV.
+
+## Search engines
+
+`robots.txt` and `sitemap.xml` point search engines at the home page and `join/`. Add a line to
+`sitemap.xml` if you add another page. The home page also tells Google who Bill is (the
+`application/ld+json` block in `index.html`; update `sameAs` when a new social account goes live),
+and `script.js` describes each upcoming show from `content.js` as an event, so nothing extra to
+edit when you add a date.

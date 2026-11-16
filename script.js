@@ -128,6 +128,43 @@
     $(".hero__next-body", next).textContent = MON[n.d.getMonth()] + " " + n.d.getDate() + " · " + n.city;
   }
 
+  // Search engines: describe upcoming shows as events (schema.org), so a
+  // search for Bill or a venue can show the date. Built from content.js.
+  (function () {
+    function easternOffset(d) {
+      // US daylight time: second Sunday in March to first Sunday in November.
+      var y = d.getFullYear();
+      var mar = new Date(y, 2, 1); mar.setDate(1 + (7 - mar.getDay()) % 7 + 7);
+      var nov = new Date(y, 10, 1); nov.setDate(1 + (7 - nov.getDay()) % 7);
+      return d >= mar && d < nov ? "-04:00" : "-05:00";
+    }
+    var events = upcoming.map(function (s) {
+      var parts = String(s.city || "").split(",");
+      var ev = {
+        "@type": "ComedyEvent",
+        name: "Bill Wernicki at " + s.venue + (s.note ? " (" + s.note + ")" : ""),
+        startDate: s.date + (s.time ? "T" + s.time + ":00" + easternOffset(s.d) : ""),
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        location: {
+          "@type": "Place",
+          name: s.venue,
+          address: { "@type": "PostalAddress", addressLocality: parts[0].trim(), addressRegion: (parts[1] || "").trim(), addressCountry: "US" }
+        },
+        performer: { "@type": "Person", name: "Bill Wernicki", url: "https://billwernickicomedy.com/" },
+        image: "https://billwernickicomedy.com/img/bill-comix.jpg",
+        url: "https://billwernickicomedy.com/#shows"
+      };
+      if (s.ticketUrl) ev.offers = { "@type": "Offer", url: s.ticketUrl, availability: "https://schema.org/InStock" };
+      return ev;
+    });
+    if (!events.length) return;
+    var ld = document.createElement("script");
+    ld.type = "application/ld+json";
+    ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": events }).replace(/</g, "\\u003c");
+    document.head.appendChild(ld);
+  })();
+
   // Links to the next show (hero card, "See him live") land with a quick red
   // pulse on that entry so it's obvious which one is next.
   var nextEl = $("#next-show");
