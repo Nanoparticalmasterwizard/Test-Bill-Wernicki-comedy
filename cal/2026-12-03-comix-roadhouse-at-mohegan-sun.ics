@@ -6,16 +6,21 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:2026-12-03-comix-roadhouse-at-mohegan-sun@billwernickicomedy.com
 DTSTAMP:20261203T000000Z
-DTSTART;VALUE=DATE:20261203
-DTEND;VALUE=DATE:20261204
+DTSTART;TZID=America/New_York:20261203T220000
+DTEND;TZID=America/New_York:20261204T000000
 SUMMARY:Bill Wernicki Comedy at Comix Roadhouse at Mohegan Sun
 LOCATION:Comix Roadhouse at Mohegan Sun\, Uncasville\, CT
-DESCRIPTION:More: https://billwernickicomedy.com/
+DESCRIPTION:Tickets: https://events.leapevents.com/event/thirsty-thursday-dec2026lclaj0q\nMore: https://billwernickicomedy.com/
 URL:https://billwernickicomedy.com/
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Bill Wernicki Comedy at Comix Roadhouse at Mohegan Sun
-TRIGGER:-PT15H
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Comix Roadhouse at Mohegan Sun
+TRIGGER:-PT3H
 END:VALARM
 END:VEVENT
 END:VCALENDAR
