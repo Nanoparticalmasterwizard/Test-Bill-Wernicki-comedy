@@ -49,10 +49,23 @@
   function parseDate(s) { var p = s.split("-").map(Number); return new Date(p[0], p[1] - 1, p[2]); }
   function showId(s) { return s.date + "|" + s.venue; }
 
-  var today = new Date(); today.setHours(0, 0, 0, 0);
+  // A show moves to "Past shows" 3 hours after its start time, or at
+  // midnight when it has no time.
+  function showOver(s, now) {
+    var end = new Date(s.d);
+    if (s.time) {
+      var t = s.time.split(":");
+      end.setHours(+t[0] + 3, +(t[1] || 0), 0, 0);
+    } else {
+      end.setDate(end.getDate() + 1);
+    }
+    return now >= end;
+  }
+  var now = new Date();
   var shows = (S.shows || []).map(function (s) { return Object.assign({ d: parseDate(s.date) }, s); });
-  var upcoming = shows.filter(function (s) { return s.d >= today; }).sort(function (a, b) { return a.d - b.d; });
-  var past = shows.filter(function (s) { return s.d < today; }).sort(function (a, b) { return b.d - a.d; });
+  shows.forEach(function (s) { s.over = showOver(s, now); });
+  var upcoming = shows.filter(function (s) { return !s.over; }).sort(function (a, b) { return a.d - b.d; });
+  var past = shows.filter(function (s) { return s.over; }).sort(function (a, b) { return b.d - a.d; });
 
   function dateBlock(s) {
     return '<div class="show__date"><span class="show__mon">' + MON[s.d.getMonth()] + '</span>' +
@@ -307,7 +320,7 @@
 
   /* ---------- My Stats ---------- */
   function stats() {
-    var mine = shows.filter(function (s) { return s.d < today && store.attended.indexOf(showId(s)) > -1; });
+    var mine = shows.filter(function (s) { return s.over && store.attended.indexOf(showId(s)) > -1; });
     var live = mine.reduce(function (t, s) { return t + (s.setMinutes || 0); }, 0);
     var watched = Object.keys(store.watched).reduce(function (t, k) { return t + (+store.watched[k] || 0); }, 0);
     var cities = {};

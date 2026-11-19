@@ -18,7 +18,8 @@ window.SITE = {
 
   /*
    * Shows. Dates are YYYY-MM-DD. The site sorts them and moves a show to
-   * "Past shows" automatically the day after it happens.
+   * "Past shows" automatically 3 hours after its start time (or the day
+   * after, when it has no time).
    * setMinutes is roughly how long Bill's set is; My Stats uses it.
    * Leave ticketUrl empty ("") to show "Tickets soon".
    * tickets: false hides the Tickets button (open mics, free shows).
