@@ -18,7 +18,7 @@ window.SITE = {
 
   /*
    * Shows. Dates are YYYY-MM-DD. The site sorts them and moves a show to
-   * "Past shows" automatically 3 hours after its start time (or the day
+   * "Past shows" automatically 2 hours after its start time (or the day
    * after, when it has no time).
    * setMinutes is roughly how long Bill's set is; My Stats uses it.
    * Leave ticketUrl empty ("") to show "Tickets soon".
@@ -29,6 +29,7 @@ window.SITE = {
   shows: [
     { date: "2026-11-18", venue: "Toyo Hibachi & Asian Fusion",    city: "Colchester, CT", note: "Open mic", time: "19:00", tickets: false, setMinutes: 7 },
     { date: "2026-11-18", venue: "Koncrete Gardens",               city: "Hartford, CT", note: "Open mic", time: "20:00", tickets: false, setMinutes: 10 },
+    { date: "2026-11-23", venue: "Garibaldi's",                   city: "Willimantic, CT", note: "", time: "19:00", tickets: false, setMinutes: 7 },
     { date: "2026-12-03", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "Thirsty Thursday", time: "22:00", ticketUrl: "https://events.leapevents.com/event/thirsty-thursday-dec2026lclaj0q", setMinutes: 10 },
 
     // Past shows (fans can mark these "I was there")

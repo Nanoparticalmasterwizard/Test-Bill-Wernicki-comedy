@@ -49,13 +49,13 @@
   function parseDate(s) { var p = s.split("-").map(Number); return new Date(p[0], p[1] - 1, p[2]); }
   function showId(s) { return s.date + "|" + s.venue; }
 
-  // A show moves to "Past shows" 3 hours after its start time, or at
+  // A show moves to "Past shows" 2 hours after its start time, or at
   // midnight when it has no time.
   function showOver(s, now) {
     var end = new Date(s.d);
     if (s.time) {
       var t = s.time.split(":");
-      end.setHours(+t[0] + 3, +(t[1] || 0), 0, 0);
+      end.setHours(+t[0] + 2, +(t[1] || 0), 0, 0);
     } else {
       end.setDate(end.getDate() + 1);
     }
