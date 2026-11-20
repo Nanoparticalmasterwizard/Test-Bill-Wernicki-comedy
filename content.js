@@ -30,7 +30,7 @@ window.SITE = {
     { date: "2026-11-18", venue: "Toyo Hibachi & Asian Fusion",    city: "Colchester, CT", note: "Open mic", time: "19:00", tickets: false, setMinutes: 7 },
     { date: "2026-11-18", venue: "Koncrete Gardens",               city: "Hartford, CT", note: "Open mic", time: "20:00", tickets: false, setMinutes: 10 },
     { date: "2026-11-23", venue: "Garibaldi's",                   city: "Willimantic, CT", note: "", time: "19:00", tickets: false, setMinutes: 7 },
-    { date: "2026-11-25", venue: "Koncrete Gardens",               city: "Hartford, CT", note: "Open mic", time: "19:30", tickets: false, setMinutes: 10 },
+    { date: "2026-11-25", venue: "Koncrete Gardens",               city: "Hartford, CT", note: "Hosting the open mic", time: "19:30", tickets: false, setMinutes: 10 },
     { date: "2026-11-27", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "Comedy Court: Cash or Lash", time: "22:00", ticketUrl: "https://events.leapevents.com/event/cash-or-lash-112726jzpuuqy", setMinutes: 10 },  // set length is a guess
     { date: "2026-12-03", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "Thirsty Thursday", time: "22:00", ticketUrl: "https://events.leapevents.com/event/thirsty-thursday-dec2026lclaj0q", setMinutes: 10 },
 
