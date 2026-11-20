@@ -34,6 +34,8 @@ window.SITE = {
     { date: "2026-12-03", venue: "Comix Roadhouse at Mohegan Sun", city: "Uncasville, CT", note: "Thirsty Thursday", time: "22:00", ticketUrl: "https://events.leapevents.com/event/thirsty-thursday-dec2026lclaj0q", setMinutes: 10 },
 
     // Past shows (fans can mark these "I was there")
+    { date: "2026-11-11", venue: "Toyo Hibachi & Asian Fusion",    city: "Colchester, CT", note: "Open mic", tickets: false, setMinutes: 7 },  // set length is a guess
+    { date: "2026-11-04", venue: "Garibaldi's",                   city: "Willimantic, CT", note: "", tickets: false, setMinutes: 7 },  // set length is a guess
     { date: "2026-09-24", venue: "Comix Roadhouse",                city: "Uncasville, CT", note: "", setMinutes: 5 },  // from Instagram; set length is a guess
   ],
 
