@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bill Wernicki Comedy//Shows//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:2026-11-27-comix-roadhouse-at-mohegan-sun@billwernickicomedy.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=America/New_York:20261127T220000
+DTEND;TZID=America/New_York:20261128T000000
+SUMMARY:Bill Wernicki Comedy at Comix Roadhouse at Mohegan Sun
+LOCATION:Comix Roadhouse at Mohegan Sun\, Uncasville\, CT
+DESCRIPTION:Tickets: https://events.leapevents.com/event/cash-or-lash-112726jzpuuqy\nMore: https://billwernickicomedy.com/
+URL:https://billwernickicomedy.com/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Comix Roadhouse at Mohegan Sun
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Comix Roadhouse at Mohegan Sun
+TRIGGER:-PT3H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
