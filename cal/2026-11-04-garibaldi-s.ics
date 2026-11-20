@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bill Wernicki Comedy//Shows//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:2026-11-04-garibaldi-s@billwernickicomedy.com
+DTSTAMP:20261104T000000Z
+DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261105
+SUMMARY:Bill Wernicki Comedy at Garibaldi's
+LOCATION:Garibaldi's\, Willimantic\, CT
+DESCRIPTION:More: https://billwernickicomedy.com/
+URL:https://billwernickicomedy.com/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Garibaldi's
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
