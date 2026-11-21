@@ -49,10 +49,13 @@ window.SITE = {
    */
   clips: [
     // vertical: true marks a YouTube Short (tall 9:16 tile).
-    { title: "Live at Comix Roadhouse",             youtubeId: "7me0z_dEd7c", vertical: true },
-    { title: "Made Timmy No Brakes laugh",          youtubeId: "ATlGfxXeHLk", vertical: true },
+    { title: "Spirit Halloween closed up",          youtubeId: "qnPndCbDQuU", vertical: true },
+    { title: "Home Depot toilets",                  youtubeId: "vOK69oGSjuU", vertical: true },
+    { title: "Sharing is caring",                   youtubeId: "KPh9l5-DwjM", vertical: true },
+    { title: "GTA 6 and my baby mom",               youtubeId: "mdy-rU72y0A", vertical: true },
+    { title: "Open mic set",                        youtubeId: "lrd0StzWPUo", vertical: true },
     { title: "Russell Brand and the Minions",       youtubeId: "totqPqhek44", vertical: true },
-    { title: "Hey Toyo set, 11/4",                  youtubeId: "5FCxjrDLaAQ", vertical: true },
+    { title: "Made Timmy No Brakes laugh",          youtubeId: "ATlGfxXeHLk", vertical: true },
   ],
   // "More on YouTube" link under the clips. Empty hides it.
   youtubeChannel: "https://www.youtube.com/@yungbill99",
