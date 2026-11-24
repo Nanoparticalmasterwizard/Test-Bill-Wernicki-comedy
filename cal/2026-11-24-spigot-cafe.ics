@@ -6,8 +6,8 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:2026-11-24-spigot-cafe@billwernickicomedy.com
 DTSTAMP:20261124T000000Z
-DTSTART;TZID=America/New_York:20261124T193000
-DTEND;TZID=America/New_York:20261124T213000
+DTSTART;TZID=America/New_York:20261124T203000
+DTEND;TZID=America/New_York:20261124T223000
 SUMMARY:Bill Wernicki Comedy at Spigot Cafe
 LOCATION:Spigot Cafe\, Hartford\, CT
 DESCRIPTION:More: https://billwernickicomedy.com/
