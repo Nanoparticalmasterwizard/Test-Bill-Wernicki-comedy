@@ -258,20 +258,37 @@
   function igId(url) { var m = /instagram\.com\/(?:[^\/]+\/)?(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/.exec(url || ""); return m && m[1]; }
   function clipKey(c) { return c.youtubeId || igId(c.instagramUrl) || ""; }
   var clipsEl = $("#clips");
-  var reel = (S.clips || []).some(function (c) { return c.vertical; });
+  var allClips = S.clips || [];
+  // A wide clip marked featured (e.g. a longer compilation) sits full width above the reel of Shorts.
+  function isLead(c) { return c.featured && !c.vertical; }
+  var reel = allClips.some(function (c) { return c.vertical; });
   if (reel) clipsEl.classList.add("clips--reel");
-  clipsEl.innerHTML = (S.clips || []).map(function (c, i) {
+  function clipHtml(c, i, tall) {
     var ig = igId(c.instagramUrl);
     var playable = !!(c.youtubeId || ig);
     var thumb = c.thumb ? c.thumb : c.youtubeId ? "https://i.ytimg.com/vi/" + encodeURIComponent(c.youtubeId) + "/hqdefault.jpg" : PH[i % PH.length];
     var len = playable && c.minutes ? c.minutes + " min" : "";
     var badge = playable ? '<span class="clip__play"></span>' + (ig ? '<span class="clip__soon">Instagram</span>' : "") : '<span class="clip__soon">Coming soon</span>';
-    return '<figure class="clip reveal' + (c.featured ? " clip--featured" : "") + (ig ? " clip--ig" : "") + (reel ? " clip--tall" : "") + '">' +
+    return '<figure class="clip reveal' + (c.featured ? " clip--featured" : "") + (ig ? " clip--ig" : "") + (tall ? " clip--tall" : "") + '">' +
       '<button class="clip__frame" type="button" data-i="' + i + '" aria-label="Play ' + esc(c.title) + '"' + (playable ? "" : " disabled") + '>' +
       '<img src="' + thumb + '" alt="" loading="lazy" style="object-position:50% 35%">' + badge +
       '</button><figcaption><span class="clip__title">' + esc(c.title) + '</span><span class="clip__len">' + len + '</span></figcaption></figure>';
-  }).join("");
-  clipsEl.addEventListener("click", function (e) {
+  }
+  var leadHtml = "", restHtml = "";
+  allClips.forEach(function (c, i) {
+    if (reel && isLead(c)) leadHtml += clipHtml(c, i, false);
+    else restHtml += clipHtml(c, i, reel);
+  });
+  clipsEl.innerHTML = restHtml;
+  var clipBoxes = [clipsEl];
+  if (leadHtml) {
+    var leadEl = document.createElement("div");
+    leadEl.className = "clips clips--lead";
+    leadEl.innerHTML = leadHtml;
+    clipsEl.before(leadEl);
+    clipBoxes.push(leadEl);
+  }
+  function playClip(e) {
     var b = e.target.closest(".clip__frame");
     if (!b || b.disabled) return;
     var c = S.clips[+b.dataset.i];
@@ -289,7 +306,8 @@
     // Count the clip toward watch time once per clip.
     store.watched[clipKey(c)] = c.minutes || 0;
     save(); renderCard();
-  });
+  }
+  clipBoxes.forEach(function (el) { el.addEventListener("click", playClip); });
   if (S.youtubeChannel) {
     var more = document.createElement("p");
     more.className = "clips__more";

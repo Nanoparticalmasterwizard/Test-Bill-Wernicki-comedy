@@ -588,6 +588,8 @@ h1, h2, h3 { margin: 0; }
 .clips--reel .clip--tall .clip__frame img { object-position: 50% 50% !important; }
 .clips--reel .clip--tall .clip__title { font-size: 18px; }
 .clips--reel .clip--tall .clip__soon { top: auto; bottom: 12px; }
+/* A wide featured clip (compilation) sits full width above the reel */
+.clips.clips--lead { grid-template-columns: 1fr; margin-bottom: 24px; }
 .clips__more { margin-top: 24px; }
 .clips__more a { color: var(--text); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; font-size: 14px; text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 3px; }
 .clips__more a:hover { color: var(--accent); }

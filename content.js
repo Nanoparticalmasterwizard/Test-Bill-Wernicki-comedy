@@ -51,6 +51,8 @@ window.SITE = {
    */
   clips: [
     // vertical: true marks a YouTube Short (tall 9:16 tile).
+    // featured: true on a wide video puts it full width above the Shorts.
+    { title: "Comedy compilation",                  youtubeId: "-r-NBEsGbL0", featured: true, minutes: 6 },
     { title: "Spirit Halloween closed up",          youtubeId: "qnPndCbDQuU", vertical: true },
     { title: "Home Depot toilets",                  youtubeId: "vOK69oGSjuU", vertical: true },
     { title: "Sharing is caring",                   youtubeId: "KPh9l5-DwjM", vertical: true },
