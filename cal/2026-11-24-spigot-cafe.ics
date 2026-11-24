@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bill Wernicki Comedy//Shows//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:2026-11-24-spigot-cafe@billwernickicomedy.com
+DTSTAMP:20261124T000000Z
+DTSTART;TZID=America/New_York:20261124T193000
+DTEND;TZID=America/New_York:20261124T213000
+SUMMARY:Bill Wernicki Comedy at Spigot Cafe
+LOCATION:Spigot Cafe\, Hartford\, CT
+DESCRIPTION:More: https://billwernickicomedy.com/
+URL:https://billwernickicomedy.com/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Spigot Cafe
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bill Wernicki Comedy at Spigot Cafe
+TRIGGER:-PT3H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
